@@ -3,3 +3,255 @@ title: "Mulivariate Viz"
 ---
 
 Use this file for practice with the **mulivariate viz** in-class activity.  Refer to the class website for details.
+
+```{r}
+library(tidyverse)
+
+weather <- read.csv("https://mac-stat.github.io/data/weather_3_locations.csv") |> 
+  mutate(date = as.Date(date))  
+```
+
+
+Check out the first 6 rows
+# What are the units of observation?
+
+
+# How many data points do we have? 
+nrow(weather) --> 2367
+# What type of variables do we have?
+str(weather --> data frame; num, chr, int, 
+
+```{r}
+head(weather)
+```
+
+Example 1
+```{r}
+ggplot(weather, aes(x=temp3pm, y=location)) +
+  geom_point()
+```
+I got this wrong, i shouldve contructed a desity plot of only temp3pm
+
+## Example 2
+```{r}
+# Plot 1 (no facets & starting from a density plot of temp3pm)
+ggplot(weather, aes(x = temp3pm)) + 
+  geom_density()
+```
+## Example 2
+```{r}
+ggplot(weather, aes(x = temp3pm, fill=location)) + 
+  geom_density(alpha=0.5)
+```
+```{r}
+#plot 2
+# Plot 2 (no facets or densities)
+ggplot(weather, aes(y = temp3pm, x = location)) + 
+  geom_boxplot()
+```
+
+```{r}
+# Plot 3 (facets)
+
+ggplot(weather, aes(x = temp3pm, fill=location)) + 
+  geom_bar()
+
+```
+I also got this one wrong; I should've constructed 3 side-by-side density graphs
+
+```{r}
+# Don't worry about the syntax (we'll learn it soon)
+woll <- weather |>
+  filter(location == "Wollongong") |> 
+  mutate(date = as.Date(date))  
+```
+
+## Example 3 
+```{r}
+# How often does it raintoday?
+# Fill your geometric layer with the color blue.
+ggplot(woll, aes(x = raintoday)) +
+  geom_bar(fill="lightblue") 
+  
+```
+
+What does it tell us about rain tomorrow? 
+```{r}
+ggplot(woll, aes(x = raintoday, y=raintomorrow)) +
+  geom_smooth() 
+```
+I did this wrong; I should've constructed bar graphs 
+
+
+```{r}
+# Now compare different approaches
+
+# Default: stacked bars
+ggplot(woll, aes(x = raintoday, fill = raintomorrow)) + 
+  geom_bar()
+```
+
+```{r}
+# Side-by-side bars
+ggplot(woll, aes(x = raintoday, fill = raintomorrow)) + 
+  geom_bar(position = "dodge")
+```
+
+```{r}
+# Proportional bars
+# position = "fill" refers to filling the frame, nothing to do with the color-related fill
+ggplot(woll, aes(x = raintoday, fill = raintomorrow)) + 
+  geom_bar(position = "fill")
+```
+
+```{r}
+# Instead of a curve that captures the general TREND,
+# draw a line that illustrates the movement of RAW temperatures from day to day
+# NOTE: We haven't learned this geom yet! Guess.
+ggplot(woll, aes(y = temp3pm, x = date))
+  geom_smooth()
+```
+I don't know what to do here
+
+answer: 
+ggplot(woll, aes(y = temp3pm, x = date)) + 
+  geom_point() + 
+  geom_smooth(span = 0.5)
+  
+And for raw: 
+```{r}
+ggplot(woll, aes(y = temp3pm, x = date)) + 
+  geom_line()
+```
+## Exercise 5
+```{r}
+# Plot temp3pm vs temp9am
+# Change the code in order to indicate the location to which each data point corresponds
+ggplot(weather, aes(y = temp3pm, x = temp9am,color=location)) + 
+  geom_point()
+```
+I have no idea 
+Answer: 
+```{r}
+ggplot(weather, aes(y = temp3pm, x = temp9am, color = location)) + 
+  geom_point()
+```
+
+\
+
+Example 6
+```{r}
+# Change the code in order to construct a line plot of temp3pm vs date for each separate location (no points!)
+ggplot(weather, aes(y = temp3pm, x = date)) +
+  geom_line()
+```
+
+I still have no idea
+Answer:
+ggplot(weather, aes(y = temp3pm, x = date, color = location)) + 
+  geom_line()
+
+Exercise 7
+```{r}
+# Plot the relationship of raintomorrow & raintoday
+# Change the code in order to indicate this relationship by location
+ggplot(weather, aes(x = raintoday, fill = raintomorrow)) + 
+  geom_bar(position = "fill")
+```
+nothing
+
+Answer: 
+ggplot(weather, aes(x = raintoday, fill = raintomorrow)) + 
+  geom_bar(position = "fill") + 
+  facet_wrap(~ location)
+
+### Exercises
+
+```{r}
+# Import and check out data
+education <- read.csv("https://mac-stat.github.io/data/sat.csv")
+head(education)
+```
+
+Part a
+```{r}
+ggplot(education, aes(x=sat)) +
+  geom_density()
+```
+
+Part b
+Range 800 to 1100
+Typical: 900 and to a lesser extent 1050
+Shape: two humps (I forgot the name)
+
+## Exercise 2
+Part a
+```{r}
+ggplot(education, aes(x=sat, y=expend)) +
+  geom_smooth(method= "lm")
+```
+```{r}
+ggplot(education, aes(x=sat, y=salary)) +
+  geom_smooth(method= "lm")
+```
+Part b
+
+Interesting that these are both plots with negative relatiobships, it seems like more fundint would mean better scores, but its the opposite, and the same for teacher salary.
+
+## Exercise 3
+```{r}
+ggplot(education, aes(x=sat, y=expend, color=salary)) +
+  geom_point()
+```
+
+## Exercise 4
+
+```{r}
+ggplot(education, aes(y = sat, x = salary, color = cut(expend, 2))) + 
+  geom_point() + 
+  geom_smooth(se = FALSE, method = "lm")
+```
+
+```{r}
+ggplot(education, aes(y = sat, x = salary, color = cut(expend, 3))) + 
+  geom_point() + 
+  geom_smooth(se = FALSE, method = "lm")
+```
+
+## Exercise 5
+### Part a
+
+```{r}
+ggplot(education, aes(x=fracCat)) + 
+  geom_bar()
+```
+
+### Part b
+```{r}
+ggplot(education, aes(x=sat, y=fracCat)) +
+  geom_point()
+```
+```{r}
+ggplot(education, aes(x=sat, color=fracCat)) +
+  geom_density()
+```
+
+
+
+### Part c
+```{r}
+ggplot(education, aes(x=sat, y=expend, color=fracCat)) + 
+  geom_point() +
+  geom_smooth(method="lm")
+```
+
+The stats with less expenditure also took fewer SATs, so the people who do take it stand out as outstanding students; **simpson's paradox**
+
+
+
+
+
+
+
+
+
