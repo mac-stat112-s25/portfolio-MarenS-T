@@ -4,7 +4,7 @@ title: "Spatial Viz"
 
 Use this file for practice with the **spatial viz** in-class activity.  Refer to the class website for details.
 
-##Reading Activities
+## Reading Activities
 
 ```{r}
 # Load tidyverse package for plotting and wrangling
@@ -77,7 +77,7 @@ Thus, when controlling for hdd, renovations led to decreased energy use.
 
 ## Preview
 
-### Part 1: Interactive points on a map with leaflet
+## Part 1: Interactive points on a map with leaflet
 
 Leaflet is an open-source JavaScript library for creating maps. We can use it inside R through the leaflet package.
 
@@ -91,7 +91,7 @@ Add layers to the map using layer functions (e.g. addMarkers(), addPolygons()).
 Print the map widget to display it.
 :::
 
-## Exercise 1: A leaflet with markers / points
+### Exercise 1: A leaflet with markers / points
 
 ```{r}
 fave_places <- read.csv("https://hash-mac.github.io/stat112site-s25/data/our_fave_places.csv")
@@ -99,7 +99,7 @@ fave_places <- read.csv("https://hash-mac.github.io/stat112site-s25/data/our_fav
 # Check it out
 head(fave_places)
 ```
-### Part a
+#### Part a
 ```{r}
 # Load the leaflet package
 library(leaflet)
@@ -122,7 +122,7 @@ leaflet(data = fave_places) |>
   addMarkers(lng = ~longitude, lat = ~latitude)
 ```
 
-### Part b
+### Exercise 2: Details
 
 Details: 
 ```{r}
@@ -158,8 +158,8 @@ weight = how thick to make the lines, points, pixels
 opacity = transparency (like alpha in ggplot2)
 colors need to be in “hex” form. We used the col2hex() function from the gplots library to do that
 
-## Exercise 3: My turn
-### part 1: Loading the Data
+### Exercise 3: My turn
+#### part 1: Loading the Data
 ```{r}
 # Import starbucks location data
 starbucks <- read.csv("https://mac-stat.github.io/data/starbucks.csv")
@@ -177,10 +177,10 @@ leaflet(data = starbucks_mn) |>
   addMarkers(lng = ~Longitude, lat = ~Latitude)
 ```
 
-### Part 2: Static Points on a Map
+## Part 2: Static Points on a Map
 Laflet is only good for static maps and is not very good at plotting many points
 
-### Part 3: Simple Scatterplot
+### Exercise 3: Simple Scatterplot
 Let’s start with the ggplot() tools we already know. Construct a scatterplot of all starbucks locations, not just those in Minnesota, with:
 
 Latitude and Longitude coordinates (which goes on the y-axis?!)
@@ -194,24 +194,6 @@ ggplot(starbucks_mn, aes(x=Longitude, y=Latitude)) +
 
 Gives longitude and latitude but does not give any information on the spatial locatio  of the locations, only the coordinates. 
 
-###Exercise 4
-#### Part a
-```{r}
-# Load the package
-library(rnaturalearth)
-
-# Get info about country boundaries across the world
-# in a "sf" or simple feature format
-world_boundaries <- ne_countries(returnclass = "sf")
-```
-
-#### Part b
-```{r}
-# What does this code produce?
-# What geom are we using for the point map?
-ggplot(world_boundaries) + 
-  geom_sf()
-```
 
 ### Exercise 4
 #### Part a
@@ -255,12 +237,27 @@ ggplot(world_boundaries) +
 Starbucks is most concentrated on the east and west coasts of America, Europe, and east and south Asia. 
 
 ### Exercise 5: Zooming in on some countries
+
+Instead of world_boundaries <- ne_countries(returnclass = 'sf') we could zoom in on…
+
+the continent of Africa: ne_countries(continent = 'Africa', returnclass = 'sf')
+a set of countries: ne_countries(country = c('france', 'united kingdom', 'germany'), returnclass = 'sf')
+boundaries within a country: ne_states(country = 'united states of america', returnclass = 'sf')
+Our goal here will be to map the Starbucks locations in Canada, Mexico, and the US.
+
+#### Part a
+
+To make this map, we again need two pieces of information.
+
+1) Data on Starbucks for only Canada, Mexico, and the US, labeled as “CA”, “MX”, “US” in the starbucks data.
+
 ```{r}
 # We'll learn this syntax soon! Don't worry about it now.
 starbucks_cma <- starbucks |> 
   filter(Country %in% c('CA', 'MX', 'US'))
 ```
 
+2) A background map of state- and national-level boundaries in Canada, Mexico, and the US. This requires ne_states() in the rnaturalearth package where the countries are labeled ‘canada’, ‘mexico’, ‘united states of america’.
 
 ```{r}
 cma_boundaries <- ne_states(
@@ -294,27 +291,296 @@ ggplot(cma_boundaries) +
 
 ### Exercise 6: A state and county-level map
 
+Let’s get an even higher resolution map of Starbucks locations within the states of Minnesota, Wisconsin, North Dakota, and South Dakota, with a background map at the county-level.
+
+#### Part a
+To make this map, we again need two pieces of information.
+
+1) Data on Starbucks for only the states of interest.
+```{r}
+starbucks_midwest <- starbucks |> 
+  filter(State.Province %in% c("MN", "ND", "SD", "WI"))
+```
+
+2) A background map of state- and county-level boundaries in these states. This requires st_as_sf() in the sf package, and map() in the maps package, where the countries are labeled ‘minnesota’, ‘north dakota’, etc.
+
+```{r}
+# Load packages
+library(sf)
+library(maps)
+
+# Get the boundaries
+midwest_boundaries <- st_as_sf(
+  maps::map("county",
+            region = c("minnesota", "wisconsin", "north dakota", "south dakota"), 
+            fill = TRUE, plot = FALSE))
+
+# Check it out
+head(midwest_boundaries)
+```
+
+#### Part b
+Construct the viz
+```{r}
+ggplot(midwest_boundaries) + 
+  geom_sf() + 
+  geom_point(
+    data = starbucks_midwest,
+    aes(x = Longitude, y = Latitude),
+    alpha = 0.7,
+    size = 0.2, 
+    color = 'darkgreen'
+    ) + 
+  theme_map()
+```
+
+### Exercise 7: Contour maps
+Especially when there are lots of point locations, and those locations start overlapping on a map, it can be tough to visualize areas of higher density. Consider the Starbucks locations in Canada, Mexico, and the US that we mapped earlier:
+
+```{r}
+# Point map (we made this earlier)
+ggplot(cma_boundaries) + 
+  geom_sf() + 
+  geom_point(
+    data = starbucks_cma,
+    aes(x = Longitude, y = Latitude),
+    alpha = 0.3,
+    size = 0.2,
+    color = "darkgreen"
+  ) +
+  coord_sf(xlim = c(-179.14, -50), ylim = c(14.54, 83.11)) +
+  theme_map()
+```
+
+Now check out the contour map:
+
+```{r}
+# What changed in the plot?
+# What changed in our code?!
+ggplot(cma_boundaries) + 
+  geom_sf() + 
+  geom_density_2d(
+    data = starbucks_cma,
+    aes(x = Longitude, y = Latitude),
+    size = 0.2,
+    color = "darkgreen"
+  ) +
+  coord_sf(xlim = c(-179.14, -50), ylim = c(14.54, 83.11)) +
+  theme_map()
+```
+
+## Part 3: Choropleth maps
+
+Spatial data isn’t always in the form of point locations! For example, recall the state and county-level data on presidential elections.
+
+```{r}
+elections_by_state <-  read.csv("https://mac-stat.github.io/data/election_2020_by_state.csv")
+elections_by_counties <- read.csv("https://mac-stat.github.io/data/election_2020_county.csv")
+```
+
+In these datasets, we’re interested in the overall election outcome by region (state or county), not the specific geographic location of some observation. Let’s wrangle our data first. We’ll focus on just a few variables of interest, and create a new variable (repub_20_categories) that discretizes the repub_pct_20 variable into increments of 5 percentage points (for states) or 10 percentage points (for counties):
+
+```{r}
+# Don't worry about the code!
+
+elections_by_state <- elections_by_state |> 
+  filter(state_abbr != "DC") |> 
+  select(state_name, state_abbr, repub_pct_20) |> 
+  mutate(repub_20_categories = 
+           cut(repub_pct_20, 
+               breaks = seq(30, 70, by = 5), 
+               labels = c("30-34", "35-39", "40-44", "45-49",
+                          "50-54", "55-59", "60-64", "65-70"), 
+               include.lowest = TRUE))
+
+elections_by_counties <- elections_by_counties |> 
+  select(state_name, state_abbr, county_name, county_fips,
+          repub_pct_20, median_age, median_rent) |> 
+  mutate(repub_20_categories = 
+           cut(repub_pct_20, 
+               breaks = seq(0, 100, by = 10),
+               labels = c("0-9", "10-19", "20-29", "30-39", "40-49",
+                          "50-59", "60-69", "70-79", "80-89", "90-100"),
+               include.lowest = TRUE))
+```
+
+### Exercise 8: State-level Chloropleth maps
+Let’s map the 2020 Republican support in each state, repub_pct_20.
+
+#### Part a
+We again need two pieces of information.
+
+1) Data on elections in each state, which we already have: elections_by_state.
+
+2) A background map of state boundaries in the US. The boundaries we used for point maps don’t work here. (Optional detail: they’re sf objects and we now need a data.frame object.) Instead, we can use the map_data() function from the ggplot2 package:
+
+```{r}
+# Get the latitude and longitude coordinates of state boundaries
+states_map <- map_data("state")
+
+# Check it out
+head(states_map)
+```
+**Note**
+*Important detail:* Note that the region variable in states_map, and the state_name variable in elections_by_state both label states by the full name in lower case letters. *This is critical to the background map and our data being able to communicate.*
+
+#### Part b
+Now map repub_pct_20 by state
+
+```{r}
+# Note where the dataset, elections_by_state, is used
+# Note where the background map, states_map, is used
+ggplot(elections_by_state, aes(map_id = state_name, fill = repub_pct_20)) +
+  geom_map(map = states_map) +
+  expand_limits(x = states_map$long, y = states_map$lat) +
+  theme_map() 
+```
+
+Make it nicer: 
+```{r}
+# Make it nicer!
+ggplot(elections_by_state, aes(map_id = state_name, fill = repub_pct_20)) +
+  geom_map(map = states_map) +
+  expand_limits(x = states_map$long, y = states_map$lat) +
+  theme_map() + 
+  scale_fill_gradientn(name = "% Republican", colors = c("blue", "purple", "red"), values = scales::rescale(seq(0, 100, by = 5)))
+```
+
+It’s not easy to get fine control over the color scale for the quantitative repub_pct_20 variable.
+
+Instead, let’s plot the discretized version, repub_20_categories:
+
+```{r}
+ggplot(elections_by_state, aes(map_id = state_name, fill = repub_20_categories)) +
+  geom_map(map = states_map) +
+  expand_limits(x = states_map$long, y = states_map$lat) +
+  theme_map()
+```
+
+Refine color palette: 
+```{r}
+# Load package needed for refining color palette
+library(RColorBrewer)
+
+# Now fix the colors
+ggplot(elections_by_state, aes(map_id = state_name, fill = repub_20_categories)) +
+  geom_map(map = states_map) +
+  expand_limits(x = states_map$long, y = states_map$lat) +
+  theme_map() + 
+  scale_fill_manual(values = rev(brewer.pal(8, "RdBu")), name = "% Republican")
+```
+ 
+#### Part c
+
+We can add other layers, like points, on top of a choropleth map. Add a Starbucks layer! Do you notice any relationship between Starbucks and elections? Or are we just doing things at this point? ;)
+
+```{r}
+# Get only the starbucks data from the US
+starbucks_us <- starbucks |> 
+  filter(Country == "US")
+
+# Map it
+ggplot(elections_by_state, aes(map_id = state_name, fill = repub_20_categories)) +
+  geom_map(map = states_map) +
+  geom_point(
+    data = starbucks_us,
+    aes(x = Longitude, y = Latitude),
+    size = 0.05,
+    alpha = 0.2,
+    inherit.aes = FALSE
+  ) +
+  expand_limits(x = states_map$long, y = states_map$lat) +
+  theme_map() + 
+  scale_fill_manual(values = rev(brewer.pal(8, "RdBu")), name = "% Republican")
+```
+
+**Details (if you’re curious)**
+
+map_id is a required aesthetic for geom_map().
+- It specifies which variable in our dataset indicates the region (here state_name).
+- It connects this variable (state_name) to the region variable in our mapping background (states_map). These variables must have the same possible outcomes in order to be matched up (alabama, alaska, arizona,…).
+
+expand_limits() assures that the map covers the entire area it’s supposed to, by pulling longitudes and latitudes from the states_map.
+
+#### Part d
+
+We used geom_sf() for point maps. What geom do we use for choropleth maps?
+- geom_map
+
+### Exercise 9: County-level choropleth maps
+
+Let’s map the 2020 Republican support in each county.
+
+#### Part a
+
+We again need two pieces of information.
+
+1) Data on elections in each county, which we already have: elections_by_county.
+
+2) A background map of county boundaries in the US, stored in the county_map dataset in the socviz package:
+
+```{r}
+# Get the latitude and longitude coordinates of county boundaries
+library(socviz)
+data(county_map) 
+
+# Check it out
+head(county_map)
+```
+
+**Important detail:** We officially have a headache. Our county_map refers to each county by a 5-number id. Our elections_by_counties data refers to each county by a county_fips code, which is mostly the same as id, BUT drops any 0’s at the beginning of the code.
+
+```{r}
+head(county_map)
+```
+
+```{r}
+head(elections_by_counties)
+```
+
+This just means that we have to wrangle the data so that it can communicate with the background map.
+
+```{r}
+# Add 0's at the beginning of any fips_code that's fewer than 5 numbers long
+# Don't worry about the syntax
+elections_by_counties <- elections_by_counties |> 
+  mutate(county_fips = as.character(county_fips)) |> 
+  mutate(county_fips = 
+           ifelse(nchar(county_fips) == 4, paste0("0", county_fips), county_fips))
+```
+
+#### Part b
+Now map Republican support by county. Let’s go straight to the discretized repub_20_categories variable, and a good color scale.
+
+```{r}
+ggplot(elections_by_counties, aes(map_id = county_fips, fill = repub_20_categories)) +
+  geom_map(map = county_map) +
+  scale_fill_manual(values = rev(brewer.pal(10, "RdBu")), name = "% Republican") +
+  expand_limits(x = county_map$long, y = county_map$lat) +
+  theme_map() +
+  theme(legend.position = "right") + 
+  coord_equal()
+```
+
+### Exercise 10: Play Around! 
+
+Construct county-level maps of median_rent and median_age.
+
+```{r}
+ggplot(elections_by_counties, aes(map_id = county_fips, fill=median_age)) + 
+  geom_map(map = county_map) + 
+  expand_limits(x = county_map$long, y = county_map$lat) +
+  theme_map() +
+  theme(legend.position = "right") + 
+  coord_equal()
+```
 
 
+### Exercise 11: Chloropleth maps with leaflet
 
+Though ggplot() is often better for this purpose, we can also make choropleth maps with leaflet(). If you’re curious, check out the leaflet documentation:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+https://rstudio.github.io/leaflet/choropleths.html
 
 
 
