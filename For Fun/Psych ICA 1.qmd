@@ -1,0 +1,13 @@
+
+```{r}
+sleep_interval <- read.csv("~/Downloads/Ellie, Maren, and Yuelia's Study.csv")
+```
+
+```{r}
+ggplot(sleep_interval, aes(x=What.time.did.you.wake.up.this.morning...Not.necessarily.when.you.got.out.of.bed..)) + 
+  geom_bar()
+```
+
+
+
+
