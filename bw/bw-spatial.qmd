@@ -3,3 +3,77 @@ title: "Spatial Viz"
 ---
 
 Use this file to generate a professional looking **spatial** visualization.  The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.
+
+```{r}
+# Load required libraries
+library(tidyverse)
+library(openintro)
+library(mosaic)
+library(sf)
+library(rnaturalearth)
+library(maps)
+library(rmarkdown)
+```
+
+```{r}
+# Import starbucks location data
+starbucks <- read.csv("https://mac-stat.github.io/data/starbucks.csv")
+```
+
+```{r}
+starbucks_us_by_state <- starbucks |>
+  filter(Country == "US") |>
+  count(State.Province) |>
+  mutate(state_name = str_to_lower(abbr2state(State.Province)))
+```
+
+
+```{r}
+census_pop_est_2018 <- read_csv("https://mac-stat.github.io/data/us_census_2018_state_pop_est.csv") |>
+  separate(state, into = c("dot", "state"), extra = "merge") |>
+  select(-dot) |>
+  mutate(state = str_to_lower(state))
+
+starbucks_with_2018_pop_est <-
+  starbucks_us_by_state |>
+  left_join(census_pop_est_2018,
+    by = c("state_name" = "state")
+  ) |>
+  mutate(starbucks_per_10000 = (n / est_pop_2018) * 10000)
+```
+
+
+```{r}
+states_map <- map_data("state")
+
+starbucks_us <- starbucks |> 
+  filter(Country == "US")
+
+library(RColorBrewer)
+# scale_fill_manual(values = rev(brewer.pal(8,"PRGn")))
+
+library(viridis)
+
+```
+
+
+
+```{r fig.cap = "Created by Maren Stewart-Tanner, February 2025, source: https://mac-stat.github.io/data/starbucks.csv"}
+#| fig-alt: "Chloropleth map showing the density of Starbucks locations for every 10,000 people; more densely populated cities have fewer starbuck locations per 10000, but the most actual store locations."
+
+ggplot(starbucks_with_2018_pop_est, aes(map_id = state_name, fill = starbucks_per_10000)) + 
+  geom_map(map = states_map) +
+    geom_point(
+    data = starbucks_us,
+    aes(x = Longitude, y = Latitude),
+    size = 0.05,
+    alpha = 0.2,
+    inherit.aes = FALSE,
+    color="pink") +
+    ggtitle("Starbucks by 10,000", subtitle = "Density of Starbucks locations per 10,000 people by state") +
+  expand_limits(x = states_map$long, y = states_map$lat) +
+  scale_fill_viridis(option = "viridis") +
+  theme_map()
+```
+```
+

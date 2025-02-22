@@ -3,3 +3,38 @@ title: "Trivariate Viz"
 ---
 
 Use this file to generate a professional looking **trivariate** visualization.  The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.
+
+```{r}
+# Load packages we'll need for HW 2: tidyverse, mosaic, fivethirtyeight (mosaicData will be loaded automatically when loading the mosaic package)
+
+library(tidyverse)
+library(mosaic)
+library(fivethirtyeight)
+
+```
+
+```{r}
+install.packages('fivethirtyeightdata', repos =
+'https://fivethirtyeightdata.github.io/drat/', type =
+'source')
+```
+
+```{r}
+data("Birthdays")
+daily_births <- Birthdays |> 
+  group_by(date) |> 
+  summarize(births = sum(births)) |> 
+  mutate(year = year(date), 
+         month = month(date, label = TRUE),
+         day_of_month = mday(date),
+         day_of_week = wday(date, label = TRUE))
+```
+
+```{r fig.cap = "Created by Maren Stewart-Tanner, February 2025, source is https://mac-stat.github.io/data/high_peaks.csv"}
+#|fig-alt: "Series of box plots showing births by month; more births from July to September, with medians varying with larger fluctuations in the data"
+
+ggplot(daily_births, aes(group=month, x=month, y=births, fill=month)) +
+  geom_boxplot() +
+    ggtitle("Daily Births by Month", subtitle = "range of number of daily births by month")
+```
+

@@ -3,3 +3,35 @@ title: "Univariate Viz"
 ---
 
 Use this file to generate a professional looking **univariate** visualization. The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.
+
+**Load Data and Packages**
+```{r}
+# Load packages: tidyverse, mosaic, fivethirtyeight
+
+library(tidyverse)
+library(mosaic)
+library(fivethirtyeight)
+```
+
+```{r}
+# Import data
+hikes <- read.csv("https://mac-stat.github.io/data/high_peaks.csv")
+```
+
+**Bar graph of categorical data; hikes**
+```{r fig.cap = "Created by Maren Stewart-Tanner, February 2025, source is https://mac-stat.github.io/data/high_peaks.csv"}
+#|fig-alt: "Bar graph of ratings given by hikers to different hiking trails/mountains; displays 8 difficult ratings, 12 easy, 26 moderate"
+
+ggplot(hikes, aes(x = rating)) +
+  geom_bar(color = "lightgreen", fill = "pink")  +
+  ggtitle("Hike Rating Distribution", subtitle = "Difficulty rating given by hikers")
+  labs(x = "Rating", y = "Number of hikes") +
+  theme(axis.text.x = element_text("italic", "lightblue", 0.5)) +
+  theme(axis.text.y = element_text("italic", "lightblue", 0.5)) + 
+  theme_minimal()
+```
+
+
+
+
+

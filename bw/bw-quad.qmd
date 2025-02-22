@@ -3,3 +3,48 @@ title: "Quadvariate Viz"
 ---
 
 Use this file to generate a professional looking **quadvariate** visualization.  The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.
+
+```{r}
+# Load packages we'll need for HW 2: tidyverse, mosaic, fivethirtyeight (mosaicData will be loaded automatically when loading the mosaic package)
+
+library(tidyverse)
+library(mosaic)
+library(fivethirtyeight)
+
+```
+
+```{r}
+install.packages('fivethirtyeightdata', repos =
+'https://fivethirtyeightdata.github.io/drat/', type =
+'source')
+```
+
+```{r}
+data(bechdel)
+new_bechdel <- bechdel |>
+  mutate(clean_test = factor(clean_test, c("nowomen", "notalk", "men", "dubious", "ok"))) |>
+  mutate(half_decades = cut(year, breaks = seq(1969, 2014, by = 5)))
+```
+
+
+```{r fig.cap = "Created by Maren Stewart-Tanner, February 2025, source: bechdel"}
+#|fig-alt: "Scatter plot with smooth plot overlaid; quadrivariate visualization showing somewhat strong, positive correlation between dom gross and budget as well as int gross and budget for 2013"
+
+ggplot(new_bechdel, aes(x=budget_2013, y=domgross_2013, color=binary, y.right = intgross_2013)) +
+  geom_point() +
+  geom_smooth(method="lm", color="brown") + 
+  ggtitle("Bechdel Test Results and Budget", subtitle = "Relation between dom gross, int gross, budget, and pass/fail status in the year 2013") +
+  scale_y_continuous(sec.axis = sec_axis(~.* 2, name = "Int gross")) + 
+  theme(axis.title.y.right = element_text(color = "red", 
+                                          size = 15,
+                                          face = "bold")) +
+  theme(axis.title.y = element_text(color = "red", 
+                                          size = 15,
+                                          face = "bold")) +
+  theme(axis.title.x = element_text(color = "red", 
+                                          size = 15,
+                                          face = "bold"))
+```
+
+
+

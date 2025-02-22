@@ -3,3 +3,40 @@ title: "Bivariate Viz"
 ---
 
 Use this file to generate a professional looking **bivariate** visualization.  The visualization will not perfect the first time but you are expected to improve it throughout the semester especially after covering advanced topics such as effective viz.
+
+**Load Data and Packages**
+```{r}
+# Load packages: tidyverse, mosaic, fivethirtyeight
+
+library(tidyverse)
+library(mosaic)
+library(fivethirtyeight)
+```
+
+**Create Bechdel Data Set**
+```{r}
+# Create the new_bechdel dataset
+# Don't worry about the code. We'll learn this in the next unit!
+data(bechdel)
+new_bechdel <- bechdel |>
+  mutate(clean_test = factor(clean_test, c("nowomen", "notalk", "men", "dubious", "ok"))) |>
+  mutate(half_decades = cut(year, breaks = seq(1969, 2014, by = 5)))
+```
+
+**Bar graph of categorical data; Bechdel**
+```{r fig.cap = "Created by Maren Stewart-Tanner, February 2025, source: bechdel"}
+#|fig-alt: "Stacked bar graph of bechdel test results over time; shows a positive trend towards more movies passing the bechdel test, but in the most recent results, still only about half pass"
+
+
+ggplot(new_bechdel, aes(x=half_decades, fill=clean_test)) +
+  geom_bar(position = "fill") +
+    ggtitle("Bechdel Test", subtitle = "Bechdel test results over time")
+  labs(x = "Half Decades", y = "Percent", fill = "Test results") +
+  theme(axis.text.x = element_text("italic", "lightblue", 0.5)) +
+  theme(axis.text.y = element_text("italic", "lightblue", 0.5)) +
+  theme(axis.ticks = element_line(color = "lightblue", linewidth = 2)) 
+ 
+
+```
+
+
