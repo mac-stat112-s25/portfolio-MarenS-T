@@ -1,0 +1,584 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "COMP/STAT112 Notebook",
+    "section": "",
+    "text": "Welcome\nWelcome to my online portfolio for COMP/STAT112 course taken at Macalester College. Please, use the side bar on the left for navigation.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "bw/bw-uni.html",
+    "href": "bw/bw-uni.html",
+    "title": "\n1  Univariate Viz\n",
+    "section": "",
+    "text": "Use this file to generate a professional looking univariate visualization. The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.\nLoad Data and Packages\n\n# Load packages: tidyverse, mosaic, fivethirtyeight\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(mosaic)\n\nRegistered S3 method overwritten by 'mosaic':\n  method                           from   \n  fortify.SpatialPolygonsDataFrame ggplot2\n\nThe 'mosaic' package masks several functions from core packages in order to add \nadditional features.  The original behavior of these functions should not be affected by this.\n\nAttaching package: 'mosaic'\n\nThe following object is masked from 'package:Matrix':\n\n    mean\n\nThe following objects are masked from 'package:dplyr':\n\n    count, do, tally\n\nThe following object is masked from 'package:purrr':\n\n    cross\n\nThe following object is masked from 'package:ggplot2':\n\n    stat\n\nThe following objects are masked from 'package:stats':\n\n    binom.test, cor, cor.test, cov, fivenum, IQR, median, prop.test,\n    quantile, sd, t.test, var\n\nThe following objects are masked from 'package:base':\n\n    max, mean, min, prod, range, sample, sum\n\nlibrary(fivethirtyeight)\n\n\n# Import data\nhikes &lt;- read.csv(\"https://mac-stat.github.io/data/high_peaks.csv\")\n\nBar graph of categorical data; hikes\n\n#|fig-alt: \"Bar graph of ratings given by hikers to different hiking trails/mountains; displays 8 difficult ratings, 12 easy, 26 moderate\"\n\nggplot(hikes, aes(x = rating)) +\n  geom_bar(color = \"lightgreen\", fill = \"pink\")  +\n  ggtitle(\"Hike Rating Distribution\", subtitle = \"Difficulty rating given by hikers\")\n\n\n\nCreated by Maren Stewart-Tanner, February 2025, source is https://mac-stat.github.io/data/high_peaks.csv\n\n\n  labs(x = \"Rating\", y = \"Number of hikes\") +\n  theme(axis.text.x = element_text(\"italic\", \"lightblue\", 0.5)) +\n  theme(axis.text.y = element_text(\"italic\", \"lightblue\", 0.5)) + \n  theme_minimal()\n\nNULL",
+    "crumbs": [
+      "Best Work",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Univariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "bw/bw-bi.html",
+    "href": "bw/bw-bi.html",
+    "title": "\n2  Bivariate Viz\n",
+    "section": "",
+    "text": "Use this file to generate a professional looking bivariate visualization. The visualization will not perfect the first time but you are expected to improve it throughout the semester especially after covering advanced topics such as effective viz.\nLoad Data and Packages\n\n# Load packages: tidyverse, mosaic, fivethirtyeight\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(mosaic)\n\nRegistered S3 method overwritten by 'mosaic':\n  method                           from   \n  fortify.SpatialPolygonsDataFrame ggplot2\n\nThe 'mosaic' package masks several functions from core packages in order to add \nadditional features.  The original behavior of these functions should not be affected by this.\n\nAttaching package: 'mosaic'\n\nThe following object is masked from 'package:Matrix':\n\n    mean\n\nThe following objects are masked from 'package:dplyr':\n\n    count, do, tally\n\nThe following object is masked from 'package:purrr':\n\n    cross\n\nThe following object is masked from 'package:ggplot2':\n\n    stat\n\nThe following objects are masked from 'package:stats':\n\n    binom.test, cor, cor.test, cov, fivenum, IQR, median, prop.test,\n    quantile, sd, t.test, var\n\nThe following objects are masked from 'package:base':\n\n    max, mean, min, prod, range, sample, sum\n\nlibrary(fivethirtyeight)\n\nCreate Bechdel Data Set\n\n# Create the new_bechdel dataset\n# Don't worry about the code. We'll learn this in the next unit!\ndata(bechdel)\nnew_bechdel &lt;- bechdel |&gt;\n  mutate(clean_test = factor(clean_test, c(\"nowomen\", \"notalk\", \"men\", \"dubious\", \"ok\"))) |&gt;\n  mutate(half_decades = cut(year, breaks = seq(1969, 2014, by = 5)))\n\nBar graph of categorical data; Bechdel\n\n#|fig-alt: \"Stacked bar graph of bechdel test results over time; shows a positive trend towards more movies passing the bechdel test, but in the most recent results, still only about half pass\"\n\n\nggplot(new_bechdel, aes(x=half_decades, fill=clean_test)) +\n  geom_bar(position = \"fill\") +\n    ggtitle(\"Bechdel Test\", subtitle = \"Bechdel test results over time\")\n\n\n\nCreated by Maren Stewart-Tanner, February 2025, source: bechdel\n\n\n  labs(x = \"Half Decades\", y = \"Percent\", fill = \"Test results\") +\n  theme(axis.text.x = element_text(\"italic\", \"lightblue\", 0.5)) +\n  theme(axis.text.y = element_text(\"italic\", \"lightblue\", 0.5)) +\n  theme(axis.ticks = element_line(color = \"lightblue\", linewidth = 2)) \n\nNULL",
+    "crumbs": [
+      "Best Work",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Bivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "bw/bw-tri.html",
+    "href": "bw/bw-tri.html",
+    "title": "\n3  Trivariate Viz\n",
+    "section": "",
+    "text": "Use this file to generate a professional looking trivariate visualization. The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.\n\n# Load packages we'll need for HW 2: tidyverse, mosaic, fivethirtyeight (mosaicData will be loaded automatically when loading the mosaic package)\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(mosaic)\n\nRegistered S3 method overwritten by 'mosaic':\n  method                           from   \n  fortify.SpatialPolygonsDataFrame ggplot2\n\nThe 'mosaic' package masks several functions from core packages in order to add \nadditional features.  The original behavior of these functions should not be affected by this.\n\nAttaching package: 'mosaic'\n\nThe following object is masked from 'package:Matrix':\n\n    mean\n\nThe following objects are masked from 'package:dplyr':\n\n    count, do, tally\n\nThe following object is masked from 'package:purrr':\n\n    cross\n\nThe following object is masked from 'package:ggplot2':\n\n    stat\n\nThe following objects are masked from 'package:stats':\n\n    binom.test, cor, cor.test, cov, fivenum, IQR, median, prop.test,\n    quantile, sd, t.test, var\n\nThe following objects are masked from 'package:base':\n\n    max, mean, min, prod, range, sample, sum\n\nlibrary(fivethirtyeight)\n\n\ninstall.packages('fivethirtyeightdata', repos =\n'https://fivethirtyeightdata.github.io/drat/', type =\n'source')\n\nWarning in download.file(url, destfile, method, mode = \"wb\", ...): downloaded\nlength 53874935 != reported length 54489665\n\n\nWarning in download.file(url, destfile, method, mode = \"wb\", ...): URL\n'https://fivethirtyeightdata.github.io/drat/src/contrib/fivethirtyeightdata_0.1.0.tar.gz':\nTimeout of 60 seconds was reached\n\n\nError in download.file(url, destfile, method, mode = \"wb\", ...) : \n  download from 'https://fivethirtyeightdata.github.io/drat/src/contrib/fivethirtyeightdata_0.1.0.tar.gz' failed\n\n\nWarning in download.packages(pkgs, destdir = tmpd, available = available, :\ndownload of package 'fivethirtyeightdata' failed\n\n\n\ndata(\"Birthdays\")\ndaily_births &lt;- Birthdays |&gt; \n  group_by(date) |&gt; \n  summarize(births = sum(births)) |&gt; \n  mutate(year = year(date), \n         month = month(date, label = TRUE),\n         day_of_month = mday(date),\n         day_of_week = wday(date, label = TRUE))\n\n\n#|fig-alt: \"Series of box plots showing births by month; more births from July to September, with medians varying with larger fluctuations in the data\"\n\nggplot(daily_births, aes(group=month, x=month, y=births, fill=month)) +\n  geom_boxplot() +\n    ggtitle(\"Daily Births by Month\", subtitle = \"range of number of daily births by month\")\n\n\n\nCreated by Maren Stewart-Tanner, February 2025, source is https://mac-stat.github.io/data/high_peaks.csv",
+    "crumbs": [
+      "Best Work",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Trivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "bw/bw-quad.html",
+    "href": "bw/bw-quad.html",
+    "title": "\n4  Quadvariate Viz\n",
+    "section": "",
+    "text": "Use this file to generate a professional looking quadvariate visualization. The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.\n\n# Load packages we'll need for HW 2: tidyverse, mosaic, fivethirtyeight (mosaicData will be loaded automatically when loading the mosaic package)\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(mosaic)\n\nRegistered S3 method overwritten by 'mosaic':\n  method                           from   \n  fortify.SpatialPolygonsDataFrame ggplot2\n\nThe 'mosaic' package masks several functions from core packages in order to add \nadditional features.  The original behavior of these functions should not be affected by this.\n\nAttaching package: 'mosaic'\n\nThe following object is masked from 'package:Matrix':\n\n    mean\n\nThe following objects are masked from 'package:dplyr':\n\n    count, do, tally\n\nThe following object is masked from 'package:purrr':\n\n    cross\n\nThe following object is masked from 'package:ggplot2':\n\n    stat\n\nThe following objects are masked from 'package:stats':\n\n    binom.test, cor, cor.test, cov, fivenum, IQR, median, prop.test,\n    quantile, sd, t.test, var\n\nThe following objects are masked from 'package:base':\n\n    max, mean, min, prod, range, sample, sum\n\nlibrary(fivethirtyeight)\n\n\ninstall.packages('fivethirtyeightdata', repos =\n'https://fivethirtyeightdata.github.io/drat/', type =\n'source')\n\n\ndata(bechdel)\nnew_bechdel &lt;- bechdel |&gt;\n  mutate(clean_test = factor(clean_test, c(\"nowomen\", \"notalk\", \"men\", \"dubious\", \"ok\"))) |&gt;\n  mutate(half_decades = cut(year, breaks = seq(1969, 2014, by = 5)))\n\n\n#|fig-alt: \"Scatter plot with smooth plot overlaid; quadrivariate visualization showing somewhat strong, positive correlation between dom gross and budget as well as int gross and budget for 2013\"\n\nggplot(new_bechdel, aes(x=budget_2013, y=domgross_2013, color=binary, y.right = intgross_2013)) +\n  geom_point() +\n  geom_smooth(method=\"lm\", color=\"brown\") + \n  ggtitle(\"Bechdel Test Results and Budget\", subtitle = \"Relation between dom gross, int gross, budget, and pass/fail status in the year 2013\") +\n  scale_y_continuous(sec.axis = sec_axis(~.* 2, name = \"Int gross\")) + \n  theme(axis.title.y.right = element_text(color = \"red\", \n                                          size = 15,\n                                          face = \"bold\")) +\n  theme(axis.title.y = element_text(color = \"red\", \n                                          size = 15,\n                                          face = \"bold\")) +\n  theme(axis.title.x = element_text(color = \"red\", \n                                          size = 15,\n                                          face = \"bold\"))\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\nWarning: Removed 18 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: The following aesthetics were dropped during statistical transformation:\ny.right.\nℹ This can happen when ggplot fails to infer the correct grouping structure in\n  the data.\nℹ Did you forget to specify a `group` aesthetic or to convert a numerical\n  variable into a factor?\n\n\nWarning: Removed 18 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\nCreated by Maren Stewart-Tanner, February 2025, source: bechdel",
+    "crumbs": [
+      "Best Work",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Quadvariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "bw/bw-spatial.html",
+    "href": "bw/bw-spatial.html",
+    "title": "\n5  Spatial Viz\n",
+    "section": "",
+    "text": "Use this file to generate a professional looking spatial visualization. The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.\n\n# Load required libraries\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(openintro)\n\nLoading required package: airports\nLoading required package: cherryblossom\nLoading required package: usdata\n\nlibrary(mosaic)\n\nRegistered S3 method overwritten by 'mosaic':\n  method                           from   \n  fortify.SpatialPolygonsDataFrame ggplot2\n\nThe 'mosaic' package masks several functions from core packages in order to add \nadditional features.  The original behavior of these functions should not be affected by this.\n\nAttaching package: 'mosaic'\n\nThe following object is masked from 'package:Matrix':\n\n    mean\n\nThe following object is masked from 'package:openintro':\n\n    dotPlot\n\nThe following objects are masked from 'package:dplyr':\n\n    count, do, tally\n\nThe following object is masked from 'package:purrr':\n\n    cross\n\nThe following object is masked from 'package:ggplot2':\n\n    stat\n\nThe following objects are masked from 'package:stats':\n\n    binom.test, cor, cor.test, cov, fivenum, IQR, median, prop.test,\n    quantile, sd, t.test, var\n\nThe following objects are masked from 'package:base':\n\n    max, mean, min, prod, range, sample, sum\n\nlibrary(sf)\n\nLinking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE\n\nlibrary(rnaturalearth)\nlibrary(maps)\n\n\nAttaching package: 'maps'\n\nThe following object is masked from 'package:purrr':\n\n    map\n\nlibrary(rmarkdown)\n\n\n# Import starbucks location data\nstarbucks &lt;- read.csv(\"https://mac-stat.github.io/data/starbucks.csv\")\n\n\nstarbucks_us_by_state &lt;- starbucks |&gt;\n  filter(Country == \"US\") |&gt;\n  count(State.Province) |&gt;\n  mutate(state_name = str_to_lower(abbr2state(State.Province)))\n\n\ncensus_pop_est_2018 &lt;- read_csv(\"https://mac-stat.github.io/data/us_census_2018_state_pop_est.csv\") |&gt;\n  separate(state, into = c(\"dot\", \"state\"), extra = \"merge\") |&gt;\n  select(-dot) |&gt;\n  mutate(state = str_to_lower(state))\n\nRows: 51 Columns: 2\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (1): state\ndbl (1): est_pop_2018\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nstarbucks_with_2018_pop_est &lt;-\n  starbucks_us_by_state |&gt;\n  left_join(census_pop_est_2018,\n    by = c(\"state_name\" = \"state\")\n  ) |&gt;\n  mutate(starbucks_per_10000 = (n / est_pop_2018) * 10000)\n\n\nstates_map &lt;- map_data(\"state\")\n\nstarbucks_us &lt;- starbucks |&gt; \n  filter(Country == \"US\")\n\nlibrary(RColorBrewer)\n# scale_fill_manual(values = rev(brewer.pal(8,\"PRGn\")))\n\nlibrary(viridis)\n\nLoading required package: viridisLite\n\n\n\nAttaching package: 'viridis'\n\n\nThe following object is masked from 'package:maps':\n\n    unemp\n\n\n\nggplot(starbucks_with_2018_pop_est, aes(map_id = state_name, fill = starbucks_per_10000)) + \n  geom_map(map = states_map) +\n    geom_point(\n    data = starbucks_us,\n    aes(x = Longitude, y = Latitude),\n    size = 0.05,\n    alpha = 0.2,\n    inherit.aes = FALSE,\n    color=\"pink\") +\n    ggtitle(\"Starbucks by 10,000\", subtitle = \"Density of Starbucks locations per 10,000 people by state\") +\n  expand_limits(x = states_map$long, y = states_map$lat) +\n  scale_fill_viridis(option = \"viridis\") +\n  theme_map()\n\n\n\nCreated by Maren Stewart-Tanner, February 2025, source: https://mac-stat.github.io/data/starbucks.csv\n\n\n\n\n\n\n\n\n:::{#quarto-navigation-envelope .hidden}\n[Maren Stewart-Tanner]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-int-sidebar-title\"}\n[COMP/STAT112 Notebook]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-int-navbar-title\"}\n[&lt;span class='chapter-number'&gt;6&lt;/span&gt;  &lt;span class='chapter-title'&gt;Univariate Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-int-next\"}\n[&lt;span class='chapter-number'&gt;4&lt;/span&gt;  &lt;span class='chapter-title'&gt;Quadvariate Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-int-prev\"}\n[Welcome]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-int-sidebar:/index.htmlWelcome\"}\n[Best Work]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-int-sidebar:quarto-sidebar-section-1\"}\n[&lt;span class='chapter-number'&gt;1&lt;/span&gt;  &lt;span class='chapter-title'&gt;Univariate Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-int-sidebar:/bw/bw-uni.html&lt;span-class='chapter-number'&gt;1&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Univariate-Viz&lt;/span&gt;\"}\n[&lt;span class='chapter-number'&gt;2&lt;/span&gt;  &lt;span class='chapter-title'&gt;Bivariate Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-int-sidebar:/bw/bw-bi.html&lt;span-class='chapter-number'&gt;2&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Bivariate-Viz&lt;/span&gt;\"}\n[&lt;span class='chapter-number'&gt;3&lt;/span&gt;  &lt;span class='chapter-title'&gt;Trivariate Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-int-sidebar:/bw/bw-tri.html&lt;span-class='chapter-number'&gt;3&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Trivariate-Viz&lt;/span&gt;\"}\n[&lt;span class='chapter-number'&gt;4&lt;/span&gt;  &lt;span class='chapter-title'&gt;Quadvariate Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-int-sidebar:/bw/bw-quad.html&lt;span-class='chapter-number'&gt;4&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Quadvariate-Viz&lt;/span&gt;\"}\n[&lt;span class='chapter-number'&gt;5&lt;/span&gt;  &lt;span class='chapter-title'&gt;Spatial Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-int-sidebar:/bw/bw-spatial.html&lt;span-class='chapter-number'&gt;5&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Spatial-Viz&lt;/span&gt;\"}\n[In-class Activities]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-int-sidebar:quarto-sidebar-section-2\"}\n[&lt;span class='chapter-number'&gt;6&lt;/span&gt;  &lt;span class='chapter-title'&gt;Univariate Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-int-sidebar:/ica/ica-uni.html&lt;span-class='chapter-number'&gt;6&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Univariate-Viz&lt;/span&gt;\"}\n[&lt;span class='chapter-number'&gt;7&lt;/span&gt;  &lt;span class='chapter-title'&gt;Bivariate Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-int-sidebar:/ica/ica-bi.html&lt;span-class='chapter-number'&gt;7&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Bivariate-Viz&lt;/span&gt;\"}\n[&lt;span class='chapter-number'&gt;8&lt;/span&gt;  &lt;span class='chapter-title'&gt;Mulivariate Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-int-sidebar:/ica/ica-multi.html&lt;span-class='chapter-number'&gt;8&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Mulivariate-Viz&lt;/span&gt;\"}\n[&lt;span class='chapter-number'&gt;9&lt;/span&gt;  &lt;span class='chapter-title'&gt;Spatial Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-int-sidebar:/ica/ica-spatial.html&lt;span-class='chapter-number'&gt;9&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Spatial-Viz&lt;/span&gt;\"}\n[&lt;span class='chapter-number'&gt;10&lt;/span&gt;  &lt;span class='chapter-title'&gt;ica-eff&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-int-sidebar:/ica/ica-eff.html&lt;span-class='chapter-number'&gt;10&lt;/span&gt;--&lt;span-class='chapter-title'&gt;ica-eff&lt;/span&gt;\"}\n[Best Work]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-breadcrumbs-Best-Work\"}\n[&lt;span class='chapter-number'&gt;5&lt;/span&gt;  &lt;span class='chapter-title'&gt;Spatial Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-breadcrumbs-&lt;span-class='chapter-number'&gt;5&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Spatial-Viz&lt;/span&gt;\"}\n:::\n\n\n\n:::{#quarto-meta-markdown .hidden}\n[[5]{.chapter-number}  [Spatial Viz]{.chapter-title} – COMP/STAT112 Notebook]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-metatitle\"}\n[[5]{.chapter-number}  [Spatial Viz]{.chapter-title} – COMP/STAT112 Notebook]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-twittercardtitle\"}\n[[5]{.chapter-number}  [Spatial Viz]{.chapter-title} – COMP/STAT112 Notebook]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-ogcardtitle\"}\n[COMP/STAT112 Notebook]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-metasitename\"}\n[]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-twittercarddesc\"}\n[]{.hidden .quarto-markdown-envelope-contents render-id=\"quarto-ogcardddesc\"}\n:::\n\n\n\n\n&lt;!-- --&gt;\n\n::: {.quarto-embedded-source-code}\n```````````````````{.markdown shortcodes=\"false\"}\n---\ntitle: \"Spatial Viz\"\n---\n\nUse this file to generate a professional looking **spatial** visualization.  The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.\n\nquarto-executable-code-5450563D\n\n```r\n# Load required libraries\nlibrary(tidyverse)\nlibrary(openintro)\nlibrary(mosaic)\nlibrary(sf)\nlibrary(rnaturalearth)\nlibrary(maps)\nlibrary(rmarkdown)\nquarto-executable-code-5450563D\n# Import starbucks location data\nstarbucks &lt;- read.csv(\"https://mac-stat.github.io/data/starbucks.csv\")\nquarto-executable-code-5450563D\nstarbucks_us_by_state &lt;- starbucks |&gt;\n  filter(Country == \"US\") |&gt;\n  count(State.Province) |&gt;\n  mutate(state_name = str_to_lower(abbr2state(State.Province)))\nquarto-executable-code-5450563D\ncensus_pop_est_2018 &lt;- read_csv(\"https://mac-stat.github.io/data/us_census_2018_state_pop_est.csv\") |&gt;\n  separate(state, into = c(\"dot\", \"state\"), extra = \"merge\") |&gt;\n  select(-dot) |&gt;\n  mutate(state = str_to_lower(state))\n\nstarbucks_with_2018_pop_est &lt;-\n  starbucks_us_by_state |&gt;\n  left_join(census_pop_est_2018,\n    by = c(\"state_name\" = \"state\")\n  ) |&gt;\n  mutate(starbucks_per_10000 = (n / est_pop_2018) * 10000)\nquarto-executable-code-5450563D\nstates_map &lt;- map_data(\"state\")\n\nstarbucks_us &lt;- starbucks |&gt; \n  filter(Country == \"US\")\n\nlibrary(RColorBrewer)\n# scale_fill_manual(values = rev(brewer.pal(8,\"PRGn\")))\n\nlibrary(viridis)\n```{r fig.cap = “Created by Maren Stewart-Tanner, February 2025, source: https://mac-stat.github.io/data/starbucks.csv”} #| fig-alt: “Chloropleth map showing the density of Starbucks locations for every 10,000 people; more densely populated cities have fewer starbuck locations per 10000, but the most actual store locations.”\nggplot(starbucks_with_2018_pop_est, aes(map_id = state_name, fill = starbucks_per_10000)) + geom_map(map = states_map) + geom_point( data = starbucks_us, aes(x = Longitude, y = Latitude), size = 0.05, alpha = 0.2, inherit.aes = FALSE, color=“pink”) + ggtitle(“Starbucks by 10,000”, subtitle = “Density of Starbucks locations per 10,000 people by state”) + expand_limits(x = states_map\\(long, y = states_map\\)lat) + scale_fill_viridis(option = “viridis”) + theme_map()\n\n``````````````````` :::",
+    "crumbs": [
+      "Best Work",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Spatial Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-uni.html",
+    "href": "ica/ica-uni.html",
+    "title": "Univariate Viz",
+    "section": "",
+    "text": "6.1 Exercise 1\nhead(hikes)\n\n             peak elevation difficulty ascent length time    rating\n1     Mt. Marcy        5344          5   3166   14.8 10.0  moderate\n2 Algonquin Peak       5114          5   2936    9.6  9.0  moderate\n3   Mt. Haystack       4960          7   3570   17.8 12.0 difficult\n4   Mt. Skylight       4926          7   4265   17.9 15.0 difficult\n5 Whiteface Mtn.       4867          4   2535   10.4  8.5      easy\n6       Dix Mtn.       4857          5   2800   13.2 10.0  moderate\n1) What features would we like a visualization of the categorical difficulty rating variable to capture? The rating given to each on comparison to the other factors (i.e difficulty as compared to rating)\n2) What about a visualization of the quantitative elevation variable? A graph of the ratings as compared to the increasing elevation of the mountains",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Univariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-uni.html#exercise-2",
+    "href": "ica/ica-uni.html#exercise-2",
+    "title": "Univariate Viz",
+    "section": "\n6.2 Exercise 2",
+    "text": "6.2 Exercise 2\n\n# Load the package\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Univariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-uni.html#exercise-3-bar-chart-of-ratings---part-1",
+    "href": "ica/ica-uni.html#exercise-3-bar-chart-of-ratings---part-1",
+    "title": "Univariate Viz",
+    "section": "\n6.3 Exercise 3: Bar Chart of Ratings - Part 1",
+    "text": "6.3 Exercise 3: Bar Chart of Ratings - Part 1\n\nHow many hikes fall into each category?\nAre the hikes evenly distributed among these categories, or are some more common than others?\n\n\nggplot(hikes, aes(x = rating))\n\n\n\n\n\n\n\nThink about:\n\nWhat did this do? What do you observe?\nWhat, in general, is the first argument of the ggplot() function?\nWhat is the purpose of writing x = rating?\nWhat do you think aes stands for?!?",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Univariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-uni.html#exercise-4-bar-chart-of-ratings---part-2",
+    "href": "ica/ica-uni.html#exercise-4-bar-chart-of-ratings---part-2",
+    "title": "Univariate Viz",
+    "section": "\n6.4 Exercise 4: Bar Chart of Ratings - Part 2",
+    "text": "6.4 Exercise 4: Bar Chart of Ratings - Part 2\n\n# Bar chart\nggplot(hikes, aes(x = rating)) +\n  geom_bar()\n\n\n\n\n\n\n\n\n# Adds labels to the bar chart\nggplot(hikes, aes(x = rating)) +\n  geom_bar() +\n  labs(x = \"Rating\", y = \"Number of hikes\")\n\n\n\n\n\n\n\n\n# Turns the bars blue! \nggplot(hikes, aes(x = rating)) +\n  geom_bar(fill = \"blue\") +\n  labs(x = \"Rating\", y = \"Number of hikes\")\n\n\n\n\n\n\n\n\n# Outline around bars is now orange\nggplot(hikes, aes(x = rating)) +\n  geom_bar(color = \"orange\", fill = \"blue\") +\n  labs(x = \"Rating\", y = \"Number of hikes\")\n\n\n\n\n\n\n\n\n# Changes background to white (minimal theme)\nggplot(hikes, aes(x = rating)) +\n  geom_bar(color = \"orange\", fill = \"blue\")  +\n  labs(x = \"Rating\", y = \"Number of hikes\") +\n  theme_minimal()",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Univariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-uni.html#exercise-5-bar-chart-follow-up",
+    "href": "ica/ica-uni.html#exercise-5-bar-chart-follow-up",
+    "title": "Univariate Viz",
+    "section": "\n6.5 Exercise 5: Bar Chart Follow-up",
+    "text": "6.5 Exercise 5: Bar Chart Follow-up\nPart a\nReflect on the ggplot() code.\n\nWhat’s the purpose of the +? When do we use it?\n\nTo include several thematic aspects\n\nWe added the bars using geom_bar()? Why “geom”?\n\ngeometric?\n\nWhat does labs() stand for?\n\n“Labels”\n\nWhat’s the difference between color and fill?\n\n“color” is the outline, “fill” is the bar color\nPart b\nIn general, bar charts allow us to examine the following properties of a categorical variable:\n\n\nobserved categories: What categories did we observe?\n\nRating and number of hikes\n\n\nvariability between categories: Are observations evenly spread out among the categories, or are some categories more common than others?\n\nsome more common than others?\nWe must then translate this information into the context of our analysis, here hikes in the Adirondacks. Summarize below what you learned from the bar chart, in context.\nAs the rating increases, the number of hikes also increases\nPart c\nIs there anything you don’t like about this barplot? For example: check out the x-axis again.\nIts kind of clunky.",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Univariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-uni.html#exercise-6-sad-bar-chart",
+    "href": "ica/ica-uni.html#exercise-6-sad-bar-chart",
+    "title": "Univariate Viz",
+    "section": "\n6.6 Exercise 6: Sad Bar Chart",
+    "text": "6.6 Exercise 6: Sad Bar Chart\nLet’s now consider some research questions related to the quantitative elevation variable:\nAmong the hikes, what’s the range of elevation and how are the hikes distributed within this range (e.g. evenly, in clumps, “normally”)?\n3820-5344 km; relatively even I think?\nWhat’s a typical elevation?\nAre there any outliers, i.e. hikes that have unusually high or low elevations? Here:\nConstruct a bar chart of the quantitative elevation variable. Explain why this might not be an effective visualization for this and other quantitative variables. (What questions does / doesn’t it help answer?)\n\nggplot(hikes, aes(x = elevation)) +\n  geom_bar(color = \"lightgreen\", fill = \"pink\")  +\n  labs(x = \"elevation\", y = \"number of hikes\") +\n  theme_minimal()\n\n\n\n\n\n\n\nToo many data to visualize with a bar chart. Also what should the y axis be?",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Univariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-uni.html#exercise-7-a-histogram-of-elevation",
+    "href": "ica/ica-uni.html#exercise-7-a-histogram-of-elevation",
+    "title": "Univariate Viz",
+    "section": "\n6.7 Exercise 7: A Histogram of Elevation",
+    "text": "6.7 Exercise 7: A Histogram of Elevation\nHistograms are constructed by (1) dividing up the observed range of the variable into ‘bins’ of equal width; and (2) counting up the number of cases that fall into each bin.\nPart a Let’s dig into some details.\nHow many hikes have an elevation between 4500 and 4700 feet? 6? How many total hikes have an elevation of at least 5100 feet? 2?\n\nPart b Now the bigger picture. In general, histograms allow us to examine the following properties of a quantitative variable:\n\n\ntypical outcome: Where’s the center of the data points? What’s typical?\n\nvariability & range: How spread out are the outcomes? What are the max and min outcomes?\n\nshape: How are values distributed along the observed range? Is the distribution symmetric, right-skewed, left-skewed, bi-modal, or uniform (flat)?\n\noutliers: Are there any outliers, i.e. outcomes that are unusually large/small?\n\nWe must then translate this information into the context of our analysis, here hikes in the Adirondacks. Addressing each of the features in the above list, summarize below what you learned from the histogram, in context.\nMost of the mountains are between 4000 to 4500 feet in elevation, right skewed graph, no striking outliers",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Univariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-uni.html#exercise-8-building-histograms---part-1",
+    "href": "ica/ica-uni.html#exercise-8-building-histograms---part-1",
+    "title": "Univariate Viz",
+    "section": "\n6.8 Exercise 8: Building Histograms - Part 1",
+    "text": "6.8 Exercise 8: Building Histograms - Part 1\n\nggplot(hikes, aes(x = elevation))\n\n\n\n\n\n\n\n2 min exercise was not fruitful",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Univariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-uni.html#exercise-9-building-histograms---part-2",
+    "href": "ica/ica-uni.html#exercise-9-building-histograms---part-2",
+    "title": "Univariate Viz",
+    "section": "\n6.9 Exercise 9: Building Histograms - Part 2",
+    "text": "6.9 Exercise 9: Building Histograms - Part 2\n\n# geom_histogram\" creates a histogram\nggplot(hikes, aes(x = elevation)) +\n  geom_histogram()\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n\n# Add white borders\nggplot(hikes, aes(x = elevation)) +\n  geom_histogram(color = \"white\") \n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n\n# Turn bars blue\nggplot(hikes, aes(x = elevation)) +\n  geom_histogram(color = \"white\", fill = \"blue\") \n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n\n# Add labels\nggplot(hikes, aes(x = elevation)) +\n  geom_histogram(color = \"white\") +\n  labs(x = \"Elevation (feet)\", y = \"Number of hikes\")\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n\n# defines width of bins (bin width too large)\nggplot(hikes, aes(x = elevation)) +\n  geom_histogram(color = \"white\", binwidth = 1000) +\n  labs(x = \"Elevation (feet)\", y = \"Number of hikes\")\n\n\n\n\n\n\n\n\n# Bin width too small\nggplot(hikes, aes(x = elevation)) +\n  geom_histogram(color = \"white\", binwidth = 5) +\n  labs(x = \"Elevation (feet)\", y = \"Number of hikes\")\n\n\n\n\n\n\n\n\n# Just right :)\nggplot(hikes, aes(x = elevation)) +\n  geom_histogram(color = \"white\", binwidth = 200) +\n  labs(x = \"Elevation (feet)\", y = \"Number of hikes\")",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Univariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-uni.html#exercise-10-histogram-follow-up",
+    "href": "ica/ica-uni.html#exercise-10-histogram-follow-up",
+    "title": "Univariate Viz",
+    "section": "\n6.10 Exercise 10: Histogram Follow-up",
+    "text": "6.10 Exercise 10: Histogram Follow-up\n\nWhat function added the histogram layer / geometry?\n\ngeom_histogram()\n\nWhat’s the difference between color and fill?\n\nBorder color vs fill color of the bin\n\nWhy does adding color = “white” improve the visualization?\n\nseparation between bins in graph\n\nWhat did binwidth do?\n\nMakes bins larger or smaller; edits range of data included in one bin\n\nWhy does the histogram become ineffective if the binwidth is too big (e.g. 1000 feet)?\n\nTrends in the graph can no longer be visualized\n\nWhy does the histogram become ineffective if the binwidth is too small (e.g. 5 feet)?\n\nAlmost invisible with this theme and the sections are too small to visualize larger trends within the data",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Univariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-uni.html#exercise-11-density-plots",
+    "href": "ica/ica-uni.html#exercise-11-density-plots",
+    "title": "Univariate Viz",
+    "section": "\n6.11 Exercise 11: Density Plots",
+    "text": "6.11 Exercise 11: Density Plots\n\n ggplot(hikes, aes(x = elevation)) +\n  geom_density()\n\n\n\n\n\n\n\nQuestions\n\n\nINTUITION CHECK: Before tweaking the code and thinking back to geom_bar() and geom_histogram(), how do you anticipate the following code will change the plot?\n\n\ngeom_density(color = \"blue\") : color of line will change\n\ngeom_density(fill = \"orange\") : area beneath line will change\n\n\n\nTRY IT! Test out those lines in the chunk below. Was your intuition correct?\n\n ggplot(hikes, aes(x = elevation)) +\n  geom_density() +\n  geom_density(color = \"blue\") +\n  geom_density(fill = \"orange\")\n\n\n\n\n\n\n\n\nExamine the density plot. How does it compare to the histogram?\n\nBoth show trends in the data, this one displays them in a continuous way (can predict outcomes of theoretical data not collected)\n\nWhat does it tell you about the typical elevation, variability / range in elevations, and shape of the distribution of elevations within this range?\n\nSkew right, most occurrences in the 4000 to 4250 range",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Univariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-uni.html#exercise-12-density-plots-vs-histograms",
+    "href": "ica/ica-uni.html#exercise-12-density-plots-vs-histograms",
+    "title": "Univariate Viz",
+    "section": "\n6.12 Exercise 12: Density Plots vs Histograms",
+    "text": "6.12 Exercise 12: Density Plots vs Histograms\nThe histogram and density plot both allow us to visualize the behavior of a quantitative variable: typical outcome, variability / range, shape, and outliers. What are the pros/cons of each? What do you like/not like about each?\nDensity shows trends better; histogram is useful for categorizing data into bins. The density graph is a little confusing, I need to do more research on it.",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Univariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-uni.html#exercise-13-code-communication",
+    "href": "ica/ica-uni.html#exercise-13-code-communication",
+    "title": "Univariate Viz",
+    "section": "\n6.13 Exercise 13: Code = communication",
+    "text": "6.13 Exercise 13: Code = communication\nWe obviously won’t be done until we talk about communication. All code above has a similar general structure (where the details can change):\nggplot(, aes(x = )) + geom___(color = “”, fill = ””) + labs(x = “”, y = ””)\nThough not necessary to the code working, it’s common, good practice to indent or tab the lines of code after the first line (counterexample below). Why?\n\n# YUCK\nggplot(hikes, aes(x = elevation)) +\ngeom_histogram(color = \"white\", binwidth = 200) +\nlabs(x = \"Elevation (feet)\", y = \"Number of hikes\")\n\n\n\n\n\n\n\nThough not necessary to the code working, it’s common, good practice to put a line break after each + (counterexample below). Why?\n\n# YUCK \nggplot(hikes, aes(x = elevation)) + geom_histogram(color = \"white\", binwidth = 200) + labs(x = \"Elevation (feet)\", y = \"Number of hikes\")",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Univariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-uni.html#exercise-14-practice",
+    "href": "ica/ica-uni.html#exercise-14-practice",
+    "title": "Univariate Viz",
+    "section": "\n6.14 Exercise 14: Practice",
+    "text": "6.14 Exercise 14: Practice\n\n6.14.1 Part a\nPractice your viz skills to learn about some of the variables in one of the following datasets from the previous class:\n\n# World Cup data\nworld_cup &lt;- read.csv(\"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-11-29/worldcups.csv\")\n\n\nggplot(world_cup, aes(x=goals_scored)) + \n  geom_density(color=\"lightgreen\", fill=\"pink\")",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Univariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-bi.html",
+    "href": "ica/ica-bi.html",
+    "title": "Bivariate Viz",
+    "section": "",
+    "text": "7.1 ICA Exercises\n# Load data\nelections &lt;- read.csv(\"https://mac-stat.github.io/data/election_2020_county.csv\")\n\n# Check it out\nhead(elections)\n\n  state_name state_abbr historical    county_name county_fips total_votes_20\n1    Alabama         AL        red Autauga County        1001          27770\n2    Alabama         AL        red Baldwin County        1003         109679\n3    Alabama         AL        red Barbour County        1005          10518\n4    Alabama         AL        red    Bibb County        1007           9595\n5    Alabama         AL        red  Blount County        1009          27588\n6    Alabama         AL        red Bullock County        1011           4613\n  repub_pct_20 dem_pct_20 winner_20 total_votes_16 repub_pct_16 dem_pct_16\n1        71.44      27.02     repub          24661        73.44      23.96\n2        76.17      22.41     repub          94090        77.35      19.57\n3        53.45      45.79     repub          10390        52.27      46.66\n4        78.43      20.70     repub           8748        76.97      21.42\n5        89.57       9.57     repub          25384        89.85       8.47\n6        24.84      74.70       dem           4701        24.23      75.09\n  winner_16 total_votes_12 repub_pct_12 dem_pct_12 winner_12 total_population\n1     repub          23909        72.63      26.58     repub            54907\n2     repub          84988        77.39      21.57     repub           187114\n3     repub          11459        48.34      51.25       dem            27321\n4     repub           8391        73.07      26.22     repub            22754\n5     repub          23980        86.49      12.35     repub            57623\n6       dem           5318        23.51      76.31       dem            10746\n  percent_white percent_black percent_asian percent_hispanic per_capita_income\n1            76            18             1                2             24571\n2            83             9             1                4             26766\n3            46            46             0                5             16829\n4            75            22             0                2             17427\n5            88             1             0                8             20730\n6            22            71             0                6             18628\n  median_rent median_age\n1         668       37.5\n2         693       41.5\n3         382       38.3\n4         351       39.4\n5         403       39.6\n6         276       39.6",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Bivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-bi.html#exercise-1",
+    "href": "ica/ica-bi.html#exercise-1",
+    "title": "Bivariate Viz",
+    "section": "\n8.1 Exercise 1",
+    "text": "8.1 Exercise 1\n\n#ggplot(elections, aes(x=repub_pct_16)) +\n  #geom_dotplot(y=repub_pct_20)",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Bivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-bi.html#exercise-2",
+    "href": "ica/ica-bi.html#exercise-2",
+    "title": "Bivariate Viz",
+    "section": "\n8.2 Exercise 2",
+    "text": "8.2 Exercise 2\n\n# Set up the plotting frame\n# How does this differ than the frame for our histogram of repub_pct_20 alone?\nggplot(elections, aes(y = repub_pct_20, x = repub_pct_16)) +\n  geom_text(aes(label = state_abbr), color=\"pink\")",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Bivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-bi.html#exercise-3",
+    "href": "ica/ica-bi.html#exercise-3",
+    "title": "Bivariate Viz",
+    "section": "\n8.3 Exercise 3",
+    "text": "8.3 Exercise 3\nstrong, positive relationship; TX has somewhat higher occurrence in the lower percentages as compared to general trend",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Bivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-bi.html#exercise-4",
+    "href": "ica/ica-bi.html#exercise-4",
+    "title": "Bivariate Viz",
+    "section": "\n8.4 Exercise 4",
+    "text": "8.4 Exercise 4\n\nggplot(elections, aes(y = repub_pct_20, x = repub_pct_16)) +\n  geom_point() +\n  geom_smooth()\n\n`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = \"cs\")'\n\n\n\n\n\n\n\n\nWithout original points:\n\nggplot(elections, aes(y = repub_pct_20, x = repub_pct_16)) +\n  geom_smooth()\n\n`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = \"cs\")'\n\n\n\n\n\n\n\n\nPart b: “best” linear model\n\nggplot(elections, aes(y = repub_pct_20, x = repub_pct_16)) +\n  geom_point() +\n  geom_smooth(method = \"lm\")\n\n`geom_smooth()` using formula = 'y ~ x'",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Bivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-bi.html#exercise-5",
+    "href": "ica/ica-bi.html#exercise-5",
+    "title": "Bivariate Viz",
+    "section": "\n8.5 Exercise 5",
+    "text": "8.5 Exercise 5\n\nggplot(elections, aes(y=median_rent, x=repub_pct_20)) +\n  geom_smooth(method=\"lm\")\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\n\nggplot(elections, aes(y=median_age, x=repub_pct_20)) +\n  geom_smooth(method=\"lm\")\n\n`geom_smooth()` using formula = 'y ~ x'",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Bivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-bi.html#exercise-6-sad-scatterplot",
+    "href": "ica/ica-bi.html#exercise-6-sad-scatterplot",
+    "title": "Bivariate Viz",
+    "section": "\n8.6 Exercise 6: Sad Scatterplot",
+    "text": "8.6 Exercise 6: Sad Scatterplot\n\nggplot(elections, aes(y = repub_pct_20, x = historical)) +\n  geom_point()\n\n\n\n\n\n\n\nThere are better ways to visualize/ compare categorical and quantitative data",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Bivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-bi.html#exercise-7-quantitative-vs-categorical-violins-boxes",
+    "href": "ica/ica-bi.html#exercise-7-quantitative-vs-categorical-violins-boxes",
+    "title": "Bivariate Viz",
+    "section": "\n8.7 Exercise 7: Quantitative vs Categorical – Violins & Boxes",
+    "text": "8.7 Exercise 7: Quantitative vs Categorical – Violins & Boxes\n\n# Side-by-side violin plots\nggplot(elections, aes(y = repub_pct_20, x = historical)) +\n  geom_violin()\n\n\n\n\n\n\n\n\n# Side-by-side boxplots (defined below)\nggplot(elections, aes(y = repub_pct_20, x = historical)) +\n  geom_boxplot()\n\n\n\n\n\n\n\nSo: we can visualize that it is less common for blue –&gt; more common for red, with outliers, etc",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Bivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-bi.html#exercise-8-quantitative-vs-categorical-intuition-check",
+    "href": "ica/ica-bi.html#exercise-8-quantitative-vs-categorical-intuition-check",
+    "title": "Bivariate Viz",
+    "section": "\n8.8 Exercise 8: Quantitative vs Categorical – Intuition Check",
+    "text": "8.8 Exercise 8: Quantitative vs Categorical – Intuition Check\n\nggplot(elections, aes(x = repub_pct_20)) +\n  geom_density()\n\n\n\n\n\n\nggplot(elections, aes(x = repub_pct_16)) +\n  geom_density()\n\n\n\n\n\n\n# idk",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Bivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-bi.html#exercise-9-quantitative-vs-categorical-density-plots",
+    "href": "ica/ica-bi.html#exercise-9-quantitative-vs-categorical-density-plots",
+    "title": "Bivariate Viz",
+    "section": "\n8.9 Exercise 9: Quantitative vs Categorical – Density Plots",
+    "text": "8.9 Exercise 9: Quantitative vs Categorical – Density Plots\n\n# Name two \"bad\" things about this plot\nggplot(elections, aes(x = repub_pct_20, fill = historical)) +\n  geom_density()\n\n\n\n\n\n\n\nColors overlap, colors don’t match the listed “colors” of the states\n\n# What does scale_fill_manual do?\nggplot(elections, aes(x = repub_pct_20, fill = historical)) +\n  geom_density() +\n  scale_fill_manual(values = c(\"blue\", \"purple\", \"red\"))\n\n\n\n\n\n\n\n\n# What does alpha = 0.5 do?\n# Play around with different values of alpha, between 0 and 1\nggplot(elections, aes(x = repub_pct_20, fill = historical)) +\n  geom_density(alpha = 0.5) +\n  scale_fill_manual(values = c(\"blue\", \"purple\", \"red\"))\n\n\n\n\n\n\n\n\n# What does facet_wrap do?!\nggplot(elections, aes(x = repub_pct_20, fill = historical)) +\n  geom_density() +\n  scale_fill_manual(values = c(\"blue\", \"purple\", \"red\")) +\n  facet_wrap(~ historical)\n\n\n\n\n\n\n\n\n# Let's try a similar grouping strategy with a histogram instead of density plot.\n# Why is this terrible?\nggplot(elections, aes(x = repub_pct_20, fill = historical)) +\n  geom_histogram(color = \"white\") +\n  scale_fill_manual(values = c(\"blue\", \"purple\", \"red\"))\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Bivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-bi.html#exercise-10",
+    "href": "ica/ica-bi.html#exercise-10",
+    "title": "Bivariate Viz",
+    "section": "\n8.10 Exercise 10",
+    "text": "8.10 Exercise 10\nWhich do you like best?\n\nbox or density\n\nWhat is one pro of density plots relative to boxplots?\n\nlarger, clearer, overlappable\n\nWhat is one con of density plots relative to boxplots?\n\nno median, mean, or specific outliers",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Bivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-bi.html#exercise-11-categorical-vs-categorical-intuition-check",
+    "href": "ica/ica-bi.html#exercise-11-categorical-vs-categorical-intuition-check",
+    "title": "Bivariate Viz",
+    "section": "\n8.11 Exercise 11: Categorical vs Categorical – Intuition Check",
+    "text": "8.11 Exercise 11: Categorical vs Categorical – Intuition Check\n\n# Plot 1: adjust this to recreate the top plot\nggplot(elections, aes(x = historical)) +\n  geom_bar()",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Bivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-bi.html#exercise-12-categorical-vs-categorical",
+    "href": "ica/ica-bi.html#exercise-12-categorical-vs-categorical",
+    "title": "Bivariate Viz",
+    "section": "\n8.12 Exercise 12: Categorical vs Categorical",
+    "text": "8.12 Exercise 12: Categorical vs Categorical\n\n# A stacked bar plot\n# How are the \"historical\" and \"winner_20\" variables mapped to the plot, i.e. what roles do they play?\nggplot(elections, aes(x = historical, fill = winner_20)) +\n  geom_bar()\n\n\n\n\n\n\n\n\n# A faceted bar plot\nggplot(elections, aes(x = winner_20)) +\n  geom_bar() +\n  facet_wrap(~ historical)\n\n\n\n\n\n\n\n\n# A side-by-side bar plot\n# Note the new argument to geom_bar\nggplot(elections, aes(x = historical, fill = winner_20)) +\n  geom_bar(position = \"dodge\")\n\n\n\n\n\n\n\n\n# A proportional bar plot\n# Note the new argument to geom_bar\nggplot(elections, aes(x = historical, fill = winner_20)) +\n  geom_bar(position = \"fill\")",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Bivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-bi.html#exercise-13-practice",
+    "href": "ica/ica-bi.html#exercise-13-practice",
+    "title": "Bivariate Viz",
+    "section": "\n8.13 Exercise 13: Practice",
+    "text": "8.13 Exercise 13: Practice\n\nweather &lt;- read.csv(\"https://mac-stat.github.io/data/weather_3_locations.csv\")\n\n\n# How do 3pm temperatures (temp3pm) differ by location?\n\nggplot(weather, aes(x = temp3pm, fill = location)) +\n  geom_density(alpha = 0.5) \n\nWarning: Removed 19 rows containing non-finite outside the scale range\n(`stat_density()`).\n\n\n\n\n\n\n\n\n\nggplot(weather, aes(y = temp3pm, x = temp9am)) + \n  geom_smooth() \n\n`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = \"cs\")'\n\n\nWarning: Removed 27 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\n\n\n\n\n\n\n\nggplot(weather, aes(x = location, fill=raintoday)) +\n  geom_bar()",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Bivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-multi.html",
+    "href": "ica/ica-multi.html",
+    "title": "\n8  Mulivariate Viz\n",
+    "section": "",
+    "text": "9 How many data points do we have?\nnrow(weather) –&gt; 2367 # What type of variables do we have? str(weather –&gt; data frame; num, chr, int,\nhead(weather)\n\n        date   location mintemp maxtemp rainfall evaporation sunshine\n1 2020-01-01 Wollongong    17.1    23.1        0          NA       NA\n2 2020-01-02 Wollongong    17.7    24.2        0          NA       NA\n3 2020-01-03 Wollongong    19.7    26.8        0          NA       NA\n4 2020-01-04 Wollongong    20.4    35.5        0          NA       NA\n5 2020-01-05 Wollongong    19.8    21.4        0          NA       NA\n6 2020-01-06 Wollongong    18.3    22.9        0          NA       NA\n  windgustdir windgustspeed winddir9am winddir3pm windspeed9am windspeed3pm\n1         SSW            39        SSW        SSE           20           15\n2         SSW            37          S        ENE           13           15\n3          NE            41        NNW        NNE            7           17\n4         SSW            78         NE        NNE           15           17\n5         SSW            57        SSW          S           31           35\n6          NE            35        ESE         NE           17           20\n  humidity9am humidity3pm pressure9am pressure3pm cloud9am cloud3pm temp9am\n1          69          64      1014.9      1014.0        8        1    19.1\n2          72          54      1020.1      1017.7        7        1    19.8\n3          72          71      1017.5      1013.0        6       NA    23.4\n4          77          69      1008.8      1003.9       NA       NA    24.5\n5          70          75      1018.9      1019.9       NA        7    20.7\n6          71          71      1021.2      1018.2       NA       NA    20.9\n  temp3pm raintoday risk_mm raintomorrow\n1    22.9        No     0.0           No\n2    23.6        No     0.0           No\n3    25.7        No     0.0           No\n4    26.7        No     0.0           No\n5    20.0        No     0.0           No\n6    22.6        No     0.8           No\nExample 1\nggplot(weather, aes(x=temp3pm, y=location)) +\n  geom_point()\n\nWarning: Removed 19 rows containing missing values or values outside the scale range\n(`geom_point()`).\nI got this wrong, i shouldve contructed a desity plot of only temp3pm",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Mulivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-multi.html#example-2",
+    "href": "ica/ica-multi.html#example-2",
+    "title": "\n8  Mulivariate Viz\n",
+    "section": "\n9.1 Example 2",
+    "text": "9.1 Example 2\n\n# Plot 1 (no facets & starting from a density plot of temp3pm)\nggplot(weather, aes(x = temp3pm)) + \n  geom_density()\n\nWarning: Removed 19 rows containing non-finite outside the scale range\n(`stat_density()`).",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Mulivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-multi.html#example-2-1",
+    "href": "ica/ica-multi.html#example-2-1",
+    "title": "\n8  Mulivariate Viz\n",
+    "section": "\n9.2 Example 2",
+    "text": "9.2 Example 2\n\nggplot(weather, aes(x = temp3pm, fill=location)) + \n  geom_density(alpha=0.5)\n\nWarning: Removed 19 rows containing non-finite outside the scale range\n(`stat_density()`).\n\n\n\n\n\n\n\n\n\n#plot 2\n# Plot 2 (no facets or densities)\nggplot(weather, aes(y = temp3pm, x = location)) + \n  geom_boxplot()\n\nWarning: Removed 19 rows containing non-finite outside the scale range\n(`stat_boxplot()`).\n\n\n\n\n\n\n\n\n\n# Plot 3 (facets)\n\nggplot(weather, aes(x = temp3pm, fill=location)) + \n  geom_bar()\n\nWarning: Removed 19 rows containing non-finite outside the scale range\n(`stat_count()`).\n\n\n\n\n\n\n\n\nI also got this one wrong; I should’ve constructed 3 side-by-side density graphs\n\n# Don't worry about the syntax (we'll learn it soon)\nwoll &lt;- weather |&gt;\n  filter(location == \"Wollongong\") |&gt; \n  mutate(date = as.Date(date))",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Mulivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-multi.html#example-3",
+    "href": "ica/ica-multi.html#example-3",
+    "title": "\n8  Mulivariate Viz\n",
+    "section": "\n9.3 Example 3",
+    "text": "9.3 Example 3\n\n# How often does it raintoday?\n# Fill your geometric layer with the color blue.\nggplot(woll, aes(x = raintoday)) +\n  geom_bar(fill=\"lightblue\") \n\n\n\n\n\n\n\nWhat does it tell us about rain tomorrow?\n\nggplot(woll, aes(x = raintoday, y=raintomorrow)) +\n  geom_smooth() \n\n`geom_smooth()` using method = 'loess' and formula = 'y ~ x'\n\n\n\n\n\n\n\n\nI did this wrong; I should’ve constructed bar graphs\n\n# Now compare different approaches\n\n# Default: stacked bars\nggplot(woll, aes(x = raintoday, fill = raintomorrow)) + \n  geom_bar()\n\n\n\n\n\n\n\n\n# Side-by-side bars\nggplot(woll, aes(x = raintoday, fill = raintomorrow)) + \n  geom_bar(position = \"dodge\")\n\n\n\n\n\n\n\n\n# Proportional bars\n# position = \"fill\" refers to filling the frame, nothing to do with the color-related fill\nggplot(woll, aes(x = raintoday, fill = raintomorrow)) + \n  geom_bar(position = \"fill\")\n\n\n\n\n\n\n\n\n# Instead of a curve that captures the general TREND,\n# draw a line that illustrates the movement of RAW temperatures from day to day\n# NOTE: We haven't learned this geom yet! Guess.\nggplot(woll, aes(y = temp3pm, x = date))\n\n\n\n\n\n\n  geom_smooth()\n\ngeom_smooth: na.rm = FALSE, orientation = NA, se = TRUE\nstat_smooth: na.rm = FALSE, orientation = NA, se = TRUE\nposition_identity \n\n\nI don’t know what to do here\nanswer: ggplot(woll, aes(y = temp3pm, x = date)) + geom_point() + geom_smooth(span = 0.5)\nAnd for raw:\n\nggplot(woll, aes(y = temp3pm, x = date)) + \n  geom_line()",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Mulivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-multi.html#exercise-5",
+    "href": "ica/ica-multi.html#exercise-5",
+    "title": "\n8  Mulivariate Viz\n",
+    "section": "\n9.4 Exercise 5",
+    "text": "9.4 Exercise 5\n\n# Plot temp3pm vs temp9am\n# Change the code in order to indicate the location to which each data point corresponds\nggplot(weather, aes(y = temp3pm, x = temp9am,color=location)) + \n  geom_point()\n\nWarning: Removed 27 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\nI have no idea Answer:\n\nggplot(weather, aes(y = temp3pm, x = temp9am, color = location)) + \n  geom_point()\n\nWarning: Removed 27 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\nExample 6\n\n# Change the code in order to construct a line plot of temp3pm vs date for each separate location (no points!)\nggplot(weather, aes(y = temp3pm, x = date)) +\n  geom_line()\n\n\n\n\n\n\n\nI still have no idea Answer: ggplot(weather, aes(y = temp3pm, x = date, color = location)) + geom_line()\nExercise 7\n\n# Plot the relationship of raintomorrow & raintoday\n# Change the code in order to indicate this relationship by location\nggplot(weather, aes(x = raintoday, fill = raintomorrow)) + \n  geom_bar(position = \"fill\")\n\n\n\n\n\n\n\nnothing\nAnswer: ggplot(weather, aes(x = raintoday, fill = raintomorrow)) + geom_bar(position = “fill”) + facet_wrap(~ location)\n\n9.4.1 Exercises\n\n# Import and check out data\neducation &lt;- read.csv(\"https://mac-stat.github.io/data/sat.csv\")\nhead(education)\n\n       State expend ratio salary frac verbal math  sat  fracCat\n1    Alabama  4.405  17.2 31.144    8    491  538 1029   (0,15]\n2     Alaska  8.963  17.6 47.951   47    445  489  934 (45,100]\n3    Arizona  4.778  19.3 32.175   27    448  496  944  (15,45]\n4   Arkansas  4.459  17.1 28.934    6    482  523 1005   (0,15]\n5 California  4.992  24.0 41.078   45    417  485  902  (15,45]\n6   Colorado  5.443  18.4 34.571   29    462  518  980  (15,45]\n\n\nPart a\n\nggplot(education, aes(x=sat)) +\n  geom_density()\n\n\n\n\n\n\n\nPart b Range 800 to 1100 Typical: 900 and to a lesser extent 1050 Shape: two humps (I forgot the name)",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Mulivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-multi.html#exercise-2",
+    "href": "ica/ica-multi.html#exercise-2",
+    "title": "\n8  Mulivariate Viz\n",
+    "section": "\n9.5 Exercise 2",
+    "text": "9.5 Exercise 2\nPart a\n\nggplot(education, aes(x=sat, y=expend)) +\n  geom_smooth(method= \"lm\")\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\n\nggplot(education, aes(x=sat, y=salary)) +\n  geom_smooth(method= \"lm\")\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\nPart b\nInteresting that these are both plots with negative relatiobships, it seems like more fundint would mean better scores, but its the opposite, and the same for teacher salary.",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Mulivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-multi.html#exercise-3",
+    "href": "ica/ica-multi.html#exercise-3",
+    "title": "\n8  Mulivariate Viz\n",
+    "section": "\n9.6 Exercise 3",
+    "text": "9.6 Exercise 3\n\nggplot(education, aes(x=sat, y=expend, color=salary)) +\n  geom_point()",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Mulivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-multi.html#exercise-4",
+    "href": "ica/ica-multi.html#exercise-4",
+    "title": "\n8  Mulivariate Viz\n",
+    "section": "\n9.7 Exercise 4",
+    "text": "9.7 Exercise 4\n\nggplot(education, aes(y = sat, x = salary, color = cut(expend, 2))) + \n  geom_point() + \n  geom_smooth(se = FALSE, method = \"lm\")\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\n\nggplot(education, aes(y = sat, x = salary, color = cut(expend, 3))) + \n  geom_point() + \n  geom_smooth(se = FALSE, method = \"lm\")\n\n`geom_smooth()` using formula = 'y ~ x'",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Mulivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-multi.html#exercise-5-1",
+    "href": "ica/ica-multi.html#exercise-5-1",
+    "title": "\n8  Mulivariate Viz\n",
+    "section": "\n9.8 Exercise 5",
+    "text": "9.8 Exercise 5\n\n9.8.1 Part a\n\nggplot(education, aes(x=fracCat)) + \n  geom_bar()\n\n\n\n\n\n\n\n\n9.8.2 Part b\n\nggplot(education, aes(x=sat, y=fracCat)) +\n  geom_point()\n\n\n\n\n\n\n\n\nggplot(education, aes(x=sat, color=fracCat)) +\n  geom_density()\n\n\n\n\n\n\n\n\n9.8.3 Part c\n\nggplot(education, aes(x=sat, y=expend, color=fracCat)) + \n  geom_point() +\n  geom_smooth(method=\"lm\")\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\nThe stats with less expenditure also took fewer SATs, so the people who do take it stand out as outstanding students; simpson’s paradox",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Mulivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-spatial.html",
+    "href": "ica/ica-spatial.html",
+    "title": "\n9  Spatial Viz\n",
+    "section": "",
+    "text": "9.1 Reading Activities\n# Load tidyverse package for plotting and wrangling\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n# Import the data and only keep 2 addresses\nenergy &lt;- read.csv(\"https://mac-stat.github.io/data/MacNaturalGas.csv\") |&gt; \n  mutate(date = as.Date(paste0(month, \"/1/\", year), \"%m/%d/%Y\")) |&gt; \n  filter(address != \"c\")\n\n# Check it out\nhead(energy)\n\n  month year  price therms hdd address renovated       date\n1     6 2005  35.21     21   0       a        no 2005-06-01\n2     7 2005  37.37     21   0       a        no 2005-07-01\n3     8 2005  36.93     21   3       a        no 2005-08-01\n4     9 2005  62.36     39  61       a        no 2005-09-01\n5    10 2005 184.15    120 416       a        no 2005-10-01\n6    11 2005 433.35    286 845       a        no 2005-11-01",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Spatial Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-spatial.html#reading-activities",
+    "href": "ica/ica-spatial.html#reading-activities",
+    "title": "\n9  Spatial Viz\n",
+    "section": "",
+    "text": "9.1.1 Example 1\nWhat was the range and typical energy used each month, as measured by therms? How does this differ by address?\n\nggplot(energy, aes(x=therms, y=address, fill=address)) +\n  geom_boxplot()\n\nWarning: Removed 12 rows containing non-finite outside the scale range\n(`stat_boxplot()`).\n\n\n\n\n\n\n\n\n\n9.1.2 Example 2\nHow did energy use (therms) change over time (date) at the two addresses?\n\nggplot(energy, aes(y=therms, x=date, color=address)) +\n  geom_point() +\n  geom_smooth() +\n  facet_wrap(~ address)\n\n`geom_smooth()` using method = 'loess' and formula = 'y ~ x'\n\n\nWarning: Removed 12 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 12 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\n9.1.3 Example 3\nHow did the typical energy use (therms) at the two addresses change before and after they were renovated?\n\nggplot(energy, aes(y=therms, x=date, color=renovated)) +\n  geom_point() +\n  geom_smooth(method=\"lm\") +\n  facet_wrap(~ address)\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\nWarning: Removed 12 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 12 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\n9.1.4 Example 4\nThat seems unfortunate that energy usage went up after renovations. But also fishy.\nTake 5 minutes (in your groups) to try and explain what’s going on here. Think: What confounding or lurking or omitted variable related to energy usage are we ignoring here? Try to make some plots to prove your point.\n\nggplot(energy, aes(x=date,y=hdd, color=address)) +\n  geom_smooth()\n\n`geom_smooth()` using method = 'loess' and formula = 'y ~ x'\n\n\n\n\n\n\n\n\nSo: HDD goes up over time\nAnd:\n\nggplot(energy, aes(x=date, y=therms, color=address)) +\n  geom_smooth()\n\n`geom_smooth()` using method = 'loess' and formula = 'y ~ x'\n\n\nWarning: Removed 12 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\n\n\n\n\n\n\nTherms go up in almost the exact same pattern as HDD\n\n9.1.5 Example 5\nLet’s summarize the punchlines by filling in the ???. It seemed that:\nAfter renovation… energy use increased. BUT this was explained by a confounding or omitted or lurking variable: hdd\nAfter renovation… hdd went up… which then leads to higher energy use. Thus, when controlling for hdd, renovations led to decreased energy use.",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Spatial Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-spatial.html#preview",
+    "href": "ica/ica-spatial.html#preview",
+    "title": "\n9  Spatial Viz\n",
+    "section": "\n9.2 Preview",
+    "text": "9.2 Preview",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Spatial Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-spatial.html#part-1-interactive-points-on-a-map-with-leaflet",
+    "href": "ica/ica-spatial.html#part-1-interactive-points-on-a-map-with-leaflet",
+    "title": "\n9  Spatial Viz\n",
+    "section": "\n9.3 Part 1: Interactive points on a map with leaflet",
+    "text": "9.3 Part 1: Interactive points on a map with leaflet\nLeaflet is an open-source JavaScript library for creating maps. We can use it inside R through the leaflet package.\nThis uses a different plotting framework than ggplot2, but still has a tidyverse feel (which will become more clear as we learn other tidyverse tools!).\nThe general steps are as follows:\nCreate a map widget by calling leaflet() and telling it the data to use. Add a base map using addTiles() (the default) or addProviderTiles(). Add layers to the map using layer functions (e.g. addMarkers(), addPolygons()). Print the map widget to display it. :::\n\n9.3.1 Exercise 1: A leaflet with markers / points\n\nfave_places &lt;- read.csv(\"https://hash-mac.github.io/stat112site-s25/data/our_fave_places.csv\")\n\n# Check it out\nhead(fave_places)\n\n  latitude longitude\n1       59        18\n2       45       -93\n3       33      -117\n4       40       116\n5       40       106\n6       37      -122\n\n\n\n9.3.1.1 Part a\n\n# Load the leaflet package\nlibrary(leaflet)\n\n# Just a plotting frame\nleaflet(data = fave_places)\n\n\n\n\n\n\n# Now what do we have?\nleaflet(data = fave_places) |&gt; \n  addTiles()\n\n\n\n\n\n\n# Now what do we have?\n# longitude and latitude refer to the variables in our data\nleaflet(data = fave_places) |&gt; \n  addTiles() |&gt; \n  addMarkers(lng = ~longitude, lat = ~latitude)\n\n\n\n\n\n\n9.3.2 Exercise 2: Details\nDetails:\n\n# Load package needed to change color\nlibrary(gplots)\n\n\nAttaching package: 'gplots'\n\n\nThe following object is masked from 'package:stats':\n\n    lowess\n\n# We can add colored circles instead of markers at each location\nleaflet(data = fave_places) |&gt; \n  addTiles() |&gt; \n  addCircles(color = col2hex(\"red\"))\n\n\n\n\n\n\n# We can change the background\n# Mark locations with yellow dots\n# And connect the dots, in their order in the dataset, with green lines\n# (These green lines don't mean anything here, but would if this were somebody's travel path!)\nleaflet(data = fave_places) |&gt;\n  addProviderTiles(\"USGS\") |&gt;\n  addCircles(weight = 10, opacity = 1, color = col2hex(\"yellow\")) |&gt;\n  addPolylines(\n    lng = ~longitude,\n    lat = ~latitude,\n    color = col2hex(\"green\")\n  )\n\n\n\n\n\naddProviderTiles() changes the base map. To explore all available provider base maps, type providers in the console. (Though some don’t work :/)\nUse addMarkers() or addCircles() to mark locations. Type ?addControl into the console to pull up a help file which summarizes the aesthetics of these markers and how you can change them. For example:\nweight = how thick to make the lines, points, pixels opacity = transparency (like alpha in ggplot2) colors need to be in “hex” form. We used the col2hex() function from the gplots library to do that\n\n9.3.3 Exercise 3: My turn\n\n9.3.3.1 part 1: Loading the Data\n\n# Import starbucks location data\nstarbucks &lt;- read.csv(\"https://mac-stat.github.io/data/starbucks.csv\")\n\n\n# Don't worry about the syntax\nstarbucks_mn &lt;- starbucks |&gt;   \n  filter(Country == \"US\", State.Province == \"MN\")\n\n\nleaflet(data = starbucks_mn) |&gt; \n  addTiles() |&gt; \n  addMarkers(lng = ~Longitude, lat = ~Latitude)",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Spatial Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-spatial.html#part-2-static-points-on-a-map",
+    "href": "ica/ica-spatial.html#part-2-static-points-on-a-map",
+    "title": "\n9  Spatial Viz\n",
+    "section": "\n9.4 Part 2: Static Points on a Map",
+    "text": "9.4 Part 2: Static Points on a Map\nLaflet is only good for static maps and is not very good at plotting many points\n\n9.4.1 Exercise 3: Simple Scatterplot\nLet’s start with the ggplot() tools we already know. Construct a scatterplot of all starbucks locations, not just those in Minnesota, with:\nLatitude and Longitude coordinates (which goes on the y-axis?!) Make the points transparent (alpha = 0.2) and smaller (size = 0.2) It’s pretty cool that the plots we already know can provide some spatial context. But what don’t you like about this plot?\n\nggplot(starbucks_mn, aes(x=Longitude, y=Latitude)) +\n  geom_point(alpha=0.2, size=0.2)\n\n\n\n\n\n\n\nGives longitude and latitude but does not give any information on the spatial locatio of the locations, only the coordinates.\n\n9.4.2 Exercise 4\n\n9.4.2.1 Part a\n\n# Load the package\nlibrary(rnaturalearth)\n\n# Get info about country boundaries across the world\n# in a \"sf\" or simple feature format\nworld_boundaries &lt;- ne_countries(returnclass = \"sf\")\n\n\n9.4.2.2 Part b\nBuild a new map:\n\n# What does this code produce?\n# What geom are we using for the point map?\nggplot(world_boundaries) + \n  geom_sf()\n\n\n\n\n\n\n\n\n# Load package needed to change map theme\nlibrary(mosaic)\n\nRegistered S3 method overwritten by 'mosaic':\n  method                           from   \n  fortify.SpatialPolygonsDataFrame ggplot2\n\n\n\nThe 'mosaic' package masks several functions from core packages in order to add \nadditional features.  The original behavior of these functions should not be affected by this.\n\n\n\nAttaching package: 'mosaic'\n\n\nThe following object is masked from 'package:Matrix':\n\n    mean\n\n\nThe following objects are masked from 'package:dplyr':\n\n    count, do, tally\n\n\nThe following object is masked from 'package:purrr':\n\n    cross\n\n\nThe following object is masked from 'package:ggplot2':\n\n    stat\n\n\nThe following objects are masked from 'package:stats':\n\n    binom.test, cor, cor.test, cov, fivenum, IQR, median, prop.test,\n    quantile, sd, t.test, var\n\n\nThe following objects are masked from 'package:base':\n\n    max, mean, min, prod, range, sample, sum\n\n# Add a point for each Starbucks\n# NOTE: The Starbucks info is in our starbucks data, not world_boundaries\n# How does this change how we use geom_point?!\nggplot(world_boundaries) + \n  geom_sf() + \n  geom_point(\n    data = starbucks,\n    aes(x = Longitude, y = Latitude),\n    alpha = 0.3, size = 0.2, color = \"darkgreen\"\n  ) +\n  theme_map()\n\nWarning: Removed 1 row containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\n9.4.2.3 Part c: what we learned\nStarbucks is most concentrated on the east and west coasts of America, Europe, and east and south Asia.\n\n9.4.3 Exercise 5: Zooming in on some countries\nInstead of world_boundaries &lt;- ne_countries(returnclass = ‘sf’) we could zoom in on…\nthe continent of Africa: ne_countries(continent = ‘Africa’, returnclass = ‘sf’) a set of countries: ne_countries(country = c(‘france’, ‘united kingdom’, ‘germany’), returnclass = ‘sf’) boundaries within a country: ne_states(country = ‘united states of america’, returnclass = ‘sf’) Our goal here will be to map the Starbucks locations in Canada, Mexico, and the US.\n\n9.4.3.1 Part a\nTo make this map, we again need two pieces of information.\n\nData on Starbucks for only Canada, Mexico, and the US, labeled as “CA”, “MX”, “US” in the starbucks data.\n\n\n# We'll learn this syntax soon! Don't worry about it now.\nstarbucks_cma &lt;- starbucks |&gt; \n  filter(Country %in% c('CA', 'MX', 'US'))\n\n\nA background map of state- and national-level boundaries in Canada, Mexico, and the US. This requires ne_states() in the rnaturalearth package where the countries are labeled ‘canada’, ‘mexico’, ‘united states of america’.\n\n\ncma_boundaries &lt;- ne_states(\n  country = c(\"canada\", \"mexico\", \"united states of america\"),\n  returnclass = \"sf\")\n\n\n9.4.3.2 Part b\n\n# Just the boundaries\nggplot(cma_boundaries) + \n  geom_sf()\n\n\n\n\n\n\n\n\n# Add the points\n# And zoom in\nggplot(cma_boundaries) + \n  geom_sf() + \n  geom_point(\n    data = starbucks_cma,\n    aes(x = Longitude, y = Latitude),\n    alpha = 0.3,\n    size = 0.2,\n    color = \"darkgreen\"\n  ) +\n  coord_sf(xlim = c(-179.14, -50)) +\n  theme_map()\n\n\n\n\n\n\n\n\n9.4.4 Exercise 6: A state and county-level map\nLet’s get an even higher resolution map of Starbucks locations within the states of Minnesota, Wisconsin, North Dakota, and South Dakota, with a background map at the county-level.\n\n9.4.4.1 Part a\nTo make this map, we again need two pieces of information.\n\nData on Starbucks for only the states of interest.\n\n\nstarbucks_midwest &lt;- starbucks |&gt; \n  filter(State.Province %in% c(\"MN\", \"ND\", \"SD\", \"WI\"))\n\n\nA background map of state- and county-level boundaries in these states. This requires st_as_sf() in the sf package, and map() in the maps package, where the countries are labeled ‘minnesota’, ‘north dakota’, etc.\n\n\n# Load packages\nlibrary(sf)\n\nLinking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE\n\nlibrary(maps)\n\n\nAttaching package: 'maps'\n\n\nThe following object is masked from 'package:purrr':\n\n    map\n\n# Get the boundaries\nmidwest_boundaries &lt;- st_as_sf(\n  maps::map(\"county\",\n            region = c(\"minnesota\", \"wisconsin\", \"north dakota\", \"south dakota\"), \n            fill = TRUE, plot = FALSE))\n\n# Check it out\nhead(midwest_boundaries)\n\nSimple feature collection with 6 features and 1 field\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: -96.81268 ymin: 45.05167 xmax: -93.01397 ymax: 48.53526\nGeodetic CRS:  +proj=longlat +ellps=clrk66 +no_defs +type=crs\n                                     ID                           geom\nminnesota,aitkin       minnesota,aitkin MULTIPOLYGON (((-93.03689 4...\nminnesota,anoka         minnesota,anoka MULTIPOLYGON (((-93.51817 4...\nminnesota,becker       minnesota,becker MULTIPOLYGON (((-95.14537 4...\nminnesota,beltrami   minnesota,beltrami MULTIPOLYGON (((-95.58655 4...\nminnesota,benton       minnesota,benton MULTIPOLYGON (((-93.77027 4...\nminnesota,big stone minnesota,big stone MULTIPOLYGON (((-96.10794 4...\n\n\n\n9.4.4.2 Part b\nConstruct the viz\n\nggplot(midwest_boundaries) + \n  geom_sf() + \n  geom_point(\n    data = starbucks_midwest,\n    aes(x = Longitude, y = Latitude),\n    alpha = 0.7,\n    size = 0.2, \n    color = 'darkgreen'\n    ) + \n  theme_map()\n\n\n\n\n\n\n\n\n9.4.5 Exercise 7: Contour maps\nEspecially when there are lots of point locations, and those locations start overlapping on a map, it can be tough to visualize areas of higher density. Consider the Starbucks locations in Canada, Mexico, and the US that we mapped earlier:\n\n# Point map (we made this earlier)\nggplot(cma_boundaries) + \n  geom_sf() + \n  geom_point(\n    data = starbucks_cma,\n    aes(x = Longitude, y = Latitude),\n    alpha = 0.3,\n    size = 0.2,\n    color = \"darkgreen\"\n  ) +\n  coord_sf(xlim = c(-179.14, -50), ylim = c(14.54, 83.11)) +\n  theme_map()\n\n\n\n\n\n\n\nNow check out the contour map:\n\n# What changed in the plot?\n# What changed in our code?!\nggplot(cma_boundaries) + \n  geom_sf() + \n  geom_density_2d(\n    data = starbucks_cma,\n    aes(x = Longitude, y = Latitude),\n    size = 0.2,\n    color = \"darkgreen\"\n  ) +\n  coord_sf(xlim = c(-179.14, -50), ylim = c(14.54, 83.11)) +\n  theme_map()\n\nWarning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.\nℹ Please use `linewidth` instead.",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Spatial Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-spatial.html#part-3-choropleth-maps",
+    "href": "ica/ica-spatial.html#part-3-choropleth-maps",
+    "title": "\n9  Spatial Viz\n",
+    "section": "\n9.5 Part 3: Choropleth maps",
+    "text": "9.5 Part 3: Choropleth maps\nSpatial data isn’t always in the form of point locations! For example, recall the state and county-level data on presidential elections.\n\nelections_by_state &lt;-  read.csv(\"https://mac-stat.github.io/data/election_2020_by_state.csv\")\nelections_by_counties &lt;- read.csv(\"https://mac-stat.github.io/data/election_2020_county.csv\")\n\nIn these datasets, we’re interested in the overall election outcome by region (state or county), not the specific geographic location of some observation. Let’s wrangle our data first. We’ll focus on just a few variables of interest, and create a new variable (repub_20_categories) that discretizes the repub_pct_20 variable into increments of 5 percentage points (for states) or 10 percentage points (for counties):\n\n# Don't worry about the code!\n\nelections_by_state &lt;- elections_by_state |&gt; \n  filter(state_abbr != \"DC\") |&gt; \n  select(state_name, state_abbr, repub_pct_20) |&gt; \n  mutate(repub_20_categories = \n           cut(repub_pct_20, \n               breaks = seq(30, 70, by = 5), \n               labels = c(\"30-34\", \"35-39\", \"40-44\", \"45-49\",\n                          \"50-54\", \"55-59\", \"60-64\", \"65-70\"), \n               include.lowest = TRUE))\n\nelections_by_counties &lt;- elections_by_counties |&gt; \n  select(state_name, state_abbr, county_name, county_fips,\n          repub_pct_20, median_age, median_rent) |&gt; \n  mutate(repub_20_categories = \n           cut(repub_pct_20, \n               breaks = seq(0, 100, by = 10),\n               labels = c(\"0-9\", \"10-19\", \"20-29\", \"30-39\", \"40-49\",\n                          \"50-59\", \"60-69\", \"70-79\", \"80-89\", \"90-100\"),\n               include.lowest = TRUE))\n\n\n9.5.1 Exercise 8: State-level Chloropleth maps\nLet’s map the 2020 Republican support in each state, repub_pct_20.\n\n9.5.1.1 Part a\nWe again need two pieces of information.\n\nData on elections in each state, which we already have: elections_by_state.\nA background map of state boundaries in the US. The boundaries we used for point maps don’t work here. (Optional detail: they’re sf objects and we now need a data.frame object.) Instead, we can use the map_data() function from the ggplot2 package:\n\n\n# Get the latitude and longitude coordinates of state boundaries\nstates_map &lt;- map_data(\"state\")\n\n# Check it out\nhead(states_map)\n\n       long      lat group order  region subregion\n1 -87.46201 30.38968     1     1 alabama      &lt;NA&gt;\n2 -87.48493 30.37249     1     2 alabama      &lt;NA&gt;\n3 -87.52503 30.37249     1     3 alabama      &lt;NA&gt;\n4 -87.53076 30.33239     1     4 alabama      &lt;NA&gt;\n5 -87.57087 30.32665     1     5 alabama      &lt;NA&gt;\n6 -87.58806 30.32665     1     6 alabama      &lt;NA&gt;\n\n\nNote Important detail: Note that the region variable in states_map, and the state_name variable in elections_by_state both label states by the full name in lower case letters. This is critical to the background map and our data being able to communicate.\n\n9.5.1.2 Part b\nNow map repub_pct_20 by state\n\n# Note where the dataset, elections_by_state, is used\n# Note where the background map, states_map, is used\nggplot(elections_by_state, aes(map_id = state_name, fill = repub_pct_20)) +\n  geom_map(map = states_map) +\n  expand_limits(x = states_map$long, y = states_map$lat) +\n  theme_map() \n\n\n\n\n\n\n\nMake it nicer:\n\n# Make it nicer!\nggplot(elections_by_state, aes(map_id = state_name, fill = repub_pct_20)) +\n  geom_map(map = states_map) +\n  expand_limits(x = states_map$long, y = states_map$lat) +\n  theme_map() + \n  scale_fill_gradientn(name = \"% Republican\", colors = c(\"blue\", \"purple\", \"red\"), values = scales::rescale(seq(0, 100, by = 5)))\n\n\n\n\n\n\n\nIt’s not easy to get fine control over the color scale for the quantitative repub_pct_20 variable.\nInstead, let’s plot the discretized version, repub_20_categories:\n\nggplot(elections_by_state, aes(map_id = state_name, fill = repub_20_categories)) +\n  geom_map(map = states_map) +\n  expand_limits(x = states_map$long, y = states_map$lat) +\n  theme_map()\n\n\n\n\n\n\n\nRefine color palette:\n\n# Load package needed for refining color palette\nlibrary(RColorBrewer)\n\n# Now fix the colors\nggplot(elections_by_state, aes(map_id = state_name, fill = repub_20_categories)) +\n  geom_map(map = states_map) +\n  expand_limits(x = states_map$long, y = states_map$lat) +\n  theme_map() + \n  scale_fill_manual(values = rev(brewer.pal(8, \"RdBu\")), name = \"% Republican\")\n\n\n\n\n\n\n\n\n9.5.1.3 Part c\nWe can add other layers, like points, on top of a choropleth map. Add a Starbucks layer! Do you notice any relationship between Starbucks and elections? Or are we just doing things at this point? ;)\n\n# Get only the starbucks data from the US\nstarbucks_us &lt;- starbucks |&gt; \n  filter(Country == \"US\")\n\n# Map it\nggplot(elections_by_state, aes(map_id = state_name, fill = repub_20_categories)) +\n  geom_map(map = states_map) +\n  geom_point(\n    data = starbucks_us,\n    aes(x = Longitude, y = Latitude),\n    size = 0.05,\n    alpha = 0.2,\n    inherit.aes = FALSE\n  ) +\n  expand_limits(x = states_map$long, y = states_map$lat) +\n  theme_map() + \n  scale_fill_manual(values = rev(brewer.pal(8, \"RdBu\")), name = \"% Republican\")\n\n\n\n\n\n\n\nDetails (if you’re curious)\nmap_id is a required aesthetic for geom_map(). - It specifies which variable in our dataset indicates the region (here state_name). - It connects this variable (state_name) to the region variable in our mapping background (states_map). These variables must have the same possible outcomes in order to be matched up (alabama, alaska, arizona,…).\nexpand_limits() assures that the map covers the entire area it’s supposed to, by pulling longitudes and latitudes from the states_map.\n\n9.5.1.4 Part d\nWe used geom_sf() for point maps. What geom do we use for choropleth maps? - geom_map\n\n9.5.2 Exercise 9: County-level choropleth maps\nLet’s map the 2020 Republican support in each county.\n\n9.5.2.1 Part a\nWe again need two pieces of information.\n\nData on elections in each county, which we already have: elections_by_county.\nA background map of county boundaries in the US, stored in the county_map dataset in the socviz package:\n\n\n# Get the latitude and longitude coordinates of county boundaries\nlibrary(socviz)\ndata(county_map) \n\n# Check it out\nhead(county_map)\n\n     long      lat order  hole piece            group    id\n1 1225889 -1275020     1 FALSE     1 0500000US01001.1 01001\n2 1235324 -1274008     2 FALSE     1 0500000US01001.1 01001\n3 1244873 -1272331     3 FALSE     1 0500000US01001.1 01001\n4 1244129 -1267515     4 FALSE     1 0500000US01001.1 01001\n5 1272010 -1262889     5 FALSE     1 0500000US01001.1 01001\n6 1276797 -1295514     6 FALSE     1 0500000US01001.1 01001\n\n\nImportant detail: We officially have a headache. Our county_map refers to each county by a 5-number id. Our elections_by_counties data refers to each county by a county_fips code, which is mostly the same as id, BUT drops any 0’s at the beginning of the code.\n\nhead(county_map)\n\n     long      lat order  hole piece            group    id\n1 1225889 -1275020     1 FALSE     1 0500000US01001.1 01001\n2 1235324 -1274008     2 FALSE     1 0500000US01001.1 01001\n3 1244873 -1272331     3 FALSE     1 0500000US01001.1 01001\n4 1244129 -1267515     4 FALSE     1 0500000US01001.1 01001\n5 1272010 -1262889     5 FALSE     1 0500000US01001.1 01001\n6 1276797 -1295514     6 FALSE     1 0500000US01001.1 01001\n\n\n\nhead(elections_by_counties)\n\n  state_name state_abbr    county_name county_fips repub_pct_20 median_age\n1    Alabama         AL Autauga County        1001        71.44       37.5\n2    Alabama         AL Baldwin County        1003        76.17       41.5\n3    Alabama         AL Barbour County        1005        53.45       38.3\n4    Alabama         AL    Bibb County        1007        78.43       39.4\n5    Alabama         AL  Blount County        1009        89.57       39.6\n6    Alabama         AL Bullock County        1011        24.84       39.6\n  median_rent repub_20_categories\n1         668               70-79\n2         693               70-79\n3         382               50-59\n4         351               70-79\n5         403               80-89\n6         276               20-29\n\n\nThis just means that we have to wrangle the data so that it can communicate with the background map.\n\n# Add 0's at the beginning of any fips_code that's fewer than 5 numbers long\n# Don't worry about the syntax\nelections_by_counties &lt;- elections_by_counties |&gt; \n  mutate(county_fips = as.character(county_fips)) |&gt; \n  mutate(county_fips = \n           ifelse(nchar(county_fips) == 4, paste0(\"0\", county_fips), county_fips))\n\n\n9.5.2.2 Part b\nNow map Republican support by county. Let’s go straight to the discretized repub_20_categories variable, and a good color scale.\n\nggplot(elections_by_counties, aes(map_id = county_fips, fill = repub_20_categories)) +\n  geom_map(map = county_map) +\n  scale_fill_manual(values = rev(brewer.pal(10, \"RdBu\")), name = \"% Republican\") +\n  expand_limits(x = county_map$long, y = county_map$lat) +\n  theme_map() +\n  theme(legend.position = \"right\") + \n  coord_equal()\n\n\n\n\n\n\n\n\n9.5.3 Exercise 10: Play Around!\nConstruct county-level maps of median_rent and median_age.\n\nggplot(elections_by_counties, aes(map_id = county_fips, fill=median_age)) + \n  geom_map(map = county_map) + \n  expand_limits(x = county_map$long, y = county_map$lat) +\n  theme_map() +\n  theme(legend.position = \"right\") + \n  coord_equal()\n\n\n\n\n\n\n\n\n9.5.4 Exercise 11: Chloropleth maps with leaflet\nThough ggplot() is often better for this purpose, we can also make choropleth maps with leaflet(). If you’re curious, check out the leaflet documentation:\nhttps://rstudio.github.io/leaflet/choropleths.html",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Spatial Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-eff.html",
+    "href": "ica/ica-eff.html",
+    "title": "\n10  ica-eff\n",
+    "section": "",
+    "text": "10.1 Warm Up\nRecall: Benefits of Visualizations\nUnderstand what we’re working with: scales & typical outcomes outliers, i.e. unusual cases patterns & relationships Refine research questions & inform next steps of our analysis. Communicate our findings and tell a story.",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ica-eff</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-eff.html#warm-up",
+    "href": "ica/ica-eff.html#warm-up",
+    "title": "\n10  ica-eff\n",
+    "section": "",
+    "text": "10.1.1 No one right viz\nThere is no one right way to visualize a data set, eg, check out the 100 ways used to visualize one dataset: https://100.datavizproject.com/ The visualized data was featured in this TidyTuesday!\nActivity: Plot Critique In groups:\nScroll through the plots. Identify at least 1 plot that you feel illuminates some important aspect of the data. # 3 illuminates change Identify at least 1 plot that does NOT illuminate the data in a good way. #28 is really confusing",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ica-eff</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-eff.html#ugly-bad-wrong-viz",
+    "href": "ica/ica-eff.html#ugly-bad-wrong-viz",
+    "title": "\n10  ica-eff\n",
+    "section": "\n10.2 Ugly, Bad, Wrong Viz",
+    "text": "10.2 Ugly, Bad, Wrong Viz\nOne way to identify effective viz is to understand what makes a viz ineffective. In the Fundamentals of Data Visualization, Wilke breaks down ineffective viz into 3 categories:\nWrong\nThe viz is “objectively incorrect”, as in the numbers / trends being displayed are wrong.\nBad\nThe viz is “unclear, confusing, overly complicated, or deceiving”.\nUgly\nThe viz correct and clear but The aesthetics are problematic.\nActivity: Critical Analysis Let’s try some critical analysis on specific examples. For your assigned viz, identify the following:\nThe story the viz is trying to communicate. Whether the viz is good, ugly, bad, wrong, or some combination. Areas for improvement.",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ica-eff</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-eff.html#exercises",
+    "href": "ica/ica-eff.html#exercises",
+    "title": "\n10  ica-eff\n",
+    "section": "\n10.3 Exercises",
+    "text": "10.3 Exercises\n\n10.3.1 Exercise 1: Professionalism\n\n# Load tidyverse package for plotting and wrangling\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n# Import the data\nweather &lt;- read.csv(\"https://mac-stat.github.io/data/weather_3_locations.csv\") |&gt; \n  mutate(date = as.Date(date))\n\nBasic plot:\n\nggplot(weather, aes(y = temp3pm, x = temp9am, color = location)) + \n  geom_point()\n\nWarning: Removed 27 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\n10.3.1.1 Part a\nAdd professional labels:\n\nggplot(weather, aes(y = temp3pm, x = temp9am, color = location)) + \n  geom_point() + \n  labs(x = \"Temperature at 9 AM\", y = \"Temperature at 3 PM\", title = \"Daily Temperatures by Location\", color = \"Location\")  \n\nWarning: Removed 27 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\n10.3.1.2 Part b\nWhen we’re including our plot in an article, paper, book, or other similar outlet, we should (and are expected to) provide a more descriptive figure caption. Typically, this is instead of a title and is more descriptive of what exactly is being plotted.\n\nAdd a figure caption in the top of the chunk.\nInclude your x-axis, y-axis, and legend labels from Part a.\nRender your Rmd and check out how the figure caption appears.\n\n\nggplot(weather, aes(y = temp3pm, x = temp9am, color = location)) + \n  geom_point() + \n  labs(x = \"Temperature at 9AM\", y = \"Temperature at 3PM\", color = \"Location\")  \n\nWarning: Removed 27 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\nPredictability of 3PM temperature by 9AM temperature in Hobart, Uluru, and Wollongong\n\n\n\n\n10.3.2 Exercise 2: Accessibility\n\nggplot(weather, aes(x = temp3pm, fill = location)) + \n  geom_density(alpha = 0.5) + \n  labs(x = \"3pm temperature (Celsius)\")  \n\nWarning: Removed 19 rows containing non-finite outside the scale range\n(`stat_density()`).\n\n\n\n\n\n\n\n\n\n10.3.2.1 Part a\nAlt text should concisely articulate:\n\nWhat your visualization is (e.g. a density plot of 3pm temperatures in Hobart, Uluru, and Wollongong, Australia).\nA 1-sentence description of the most important takeaway.\nA link to your data source if it’s not already in the caption.\n\n\nggplot(weather, aes(x = temp3pm, fill = location)) + \n  geom_density(alpha = 0.5) + \n  labs(x = \"3pm temperature (Celsius)\")  \n\nWarning: Removed 19 rows containing non-finite outside the scale range\n(`stat_density()`).\n\n\n\n\nDensity plots of 3pm temperatures in 3 Australian locations.\n\n\n\n\n10.3.2.2 Part b\nColor accessibility:\nUsing the website “https://www.color-blindness.com/coblis-color-blindness-simulator/” we can examine how if color is being used as a factor in a visualization, some viewers my be unable to decipher between colors and thus would not be able to understand the viz.  #### Part c\n\nggplot(weather, aes(x = temp3pm, fill = location)) + \n  geom_density(alpha = 0.5) + \n  labs(x = \"3pm temperature (Celsius)\") + \n  scale_fill_viridis_d()    \n\nWarning: Removed 19 rows containing non-finite outside the scale range\n(`stat_density()`).\n\n\n\n\n\n\n\n\n\n# In the color scale line:\n# Change \"fill\" to \"color\" since we use color in the aes()\n# Change \"d\" (discrete) to \"c\" (continuous) since maxtemp is on a continuous scale\nggplot(weather, aes(y = temp3pm, x = temp9am, color = maxtemp)) + \n  geom_point(alpha = 0.5) + \n  labs(x = \"3pm temperature (Celsius)\") + \n  scale_color_viridis_c()\n\nWarning: Removed 27 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\n10.3.3 Exercise 3: Ethics\nConsideration of impact\n\n10.3.3.1 Part a\nClimate change plot: this plot is unethical because the scale used on the y axis is too large to properly visualize the data. This plot would lead viewers to think there was no change in the anverage annual global temperature since 1880.\n\n10.3.3.2 Part b\nWe need to consider: visibility, privacy, power, emotion & embodiment, pluralism, & context\nPick one or more of the following examples of data viz to discuss with your group. How do the approaches taken:\n\nemphasize one or more of: visibility, privacy, power, emotion, embodiment, pluralism, and/or context?\nimprove upon what we might be able to convey with a simpler bar chart, scatterplot, etc?\n\n10.3.3.3 Part c\nRead: https://data-feminism.mitpress.mit.edu/\n\n10.3.4 Exercise 4: Critique\nPractice critiquing some more complicated data viz listed at Modern Data Science with R, Exercise 2.5.\nThink about the following questions:\nWhat story does the data graphic tell? What is the main message that you take away from it? Can the data graphic be described in terms of the Grammar of Graphics (frame, glyphs, aesthetics, facet, scale, guide)? If so, please describe. Critique and/or praise the visualization choices made by the designer. Do they work? Are they misleading? Thought-provoking? Are there things that you would have done differently?\n\n10.3.5 Exercise 5: Design Details\nGo in deeper, refer to class website",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ica-eff</span>"
+    ]
+  }
+]
