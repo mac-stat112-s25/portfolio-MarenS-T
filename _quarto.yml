@@ -30,6 +30,7 @@ book:
       - bw/bw-tri.qmd
       - bw/bw-quad.qmd
       - bw/bw-spatial.qmd
+      - bw/Exam01.qmd
 
     - part: "In-class Activities"
       chapters: 
@@ -39,6 +40,8 @@ book:
       - ica/ica-spatial.qmd
       - ica/ica-eff.qmd
       - ica/ica-wrangling.qmd
+      - ica/ica-dates.qmd
+      - ica/ica-reshaping.qmd
 
 format:
   html:
