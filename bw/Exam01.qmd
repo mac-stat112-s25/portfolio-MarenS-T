@@ -1,0 +1,84 @@
+---
+title: "Exam01"
+format: html
+---
+
+**Grand Research Question: **
+What does the conusmption of each food category in each country look like? 
+
+```{r}
+library(tidyverse)
+library(tidytuesdayR)
+```
+
+```{r}
+tuesdata <- tt_load('2020-02-18')
+```
+
+
+```{r}
+dim(tuesdata[["food_consumption"]])
+
+food_consumption <- tuesdata[["food_consumption"]]
+
+head(food_consumption, 10)
+
+class(food_consumption)
+```
+
+**Understand Variables Individually**
+```{r}
+ggplot(food_consumption, aes(y=country)) +
+  geom_bar()
+```
+
+
+```{r}
+ggplot(food_consumption, aes(y=food_category)) +
+  geom_bar()
+```
+
+```{r}
+ggplot(food_consumption, aes(x=consumption)) +
+  geom_density()
+```
+
+Count of each country and food category the same across all data points; consumption in general lies around the 15 point. 
+
+**Understand Consumption**
+
+```{r}
+ggplot(food_consumption, aes(fill=food_category, x=consumption)) + 
+  geom_density(alpha = 0.5)
+```
+
+```{r}
+#| fig-height: 22
+#| fig-width: 11
+ggplot(food_consumption, aes(fill=country, x=consumption)) + 
+  geom_density(alpha = 0.4)
+```
+These data are so large that it is difficult to visualize them. 
+
+**Answering Grand RQ**
+```{r}
+#| fig-height: 22
+#| fig-width: 22
+ggplot(food_consumption, aes(fill=country, x=consumption)) +
+  geom_density(alpha = 0.4) +
+  facet_wrap(~ "food_category")
+```
+I struggled quite a bit with finding an appropriate viz as the data points being examined are so large
+
+
+
+
+
+
+
+
+
+
+
+
+
