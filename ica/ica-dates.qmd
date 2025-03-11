@@ -277,3 +277,45 @@ Birthdays |>
 ```
 
 CA has a lot more births, other lesser outliers, and then most in the range between zero to 1700 births weekly. 
+
+### Part c
+```{r}
+Birthdays |>
+  select(state, year, month, day, births, date) |>
+  filter(year == "1988", state %in% c("CA", "MN")) |>
+  mutate(week = week(date)) |>
+  filter(week != 53) |>
+  group_by(week, state) |> 
+  summarize(weekly_total = sum(births)) |>
+  select(week, weekly_total, state) |>
+  ggplot(aes(x=week, y=weekly_total, color = state)) + 
+  geom_line()
+  
+```
+I think that the poulation of colder states tend to be smaller so this trend will carry over to other states when comparing births.
+
+## Exercise 8: More Practice
+### Part a
+Create a dataset with only births in Massachusetts (MA) in 1979 and sort the days from those with the most births to those with the fewest.
+```{r}
+Birthdays |>
+  select(state, year, month, day, births, date) |>
+  filter(year == "1979", state == "MA") |>
+  group_by(date) |>
+  mutate(day_total = sum(births)) |>
+  arrange(desc(day_total)) |>
+  head()
+```
+Make a table showing the five states with the most births between September 9, 1979 and September 12, 1979, including the 9th and 12th. Arrange the table in descending order of births.
+
+```{r}
+Birthdays |>
+  filter(year == "1979", month == "9", day >= 9, day <= 12) |>
+  group_by(state) |>
+  summarize(period_totals = sum(births)) |>
+  arrange(desc(period_totals)) |>
+  top_n(5, period_totals) |>
+  print()
+  
+```
+
