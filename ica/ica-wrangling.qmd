@@ -1,5 +1,5 @@
 ---
-title: "ica-wrangling"
+title: "Wrangling"
 format: html
 ---
 
@@ -268,19 +268,108 @@ elections_small |>
 
 elections_small |>
   group_by(state_name) |>
-  arrange(total_votes_20)
+  arrange(desc(total_votes_20)) |>
+  head()
+  
+```
+
+```{r}
+# In 2020, what were the total number of votes for the Democratic candidate and the total number of votes for the Republican candidate in each *state*?
+
+elections_small |>
+  group_by(state_name) |>
+  mutate(dem_total_20 = total_votes_20 * dem_pct_20) |>
+  mutate(rep_total_20 = total_votes_20 * repub_pct_20) |>
+  summarize(state_dem_total_20 = sum(dem_total_20), 
+            state_rep_total_20 = sum(rep_total_20)) |>
+  head()
+```
+
+```{r}
+# What states did the Democratic candidate win in 2020?
+elections_small |> 
+  group_by(state_name) |>
+  mutate(dem_total_20 = total_votes_20 * dem_pct_20) |>
+  mutate(rep_total_20 = total_votes_20 * repub_pct_20) |>
+  summarize(state_dem_total_20 = sum(dem_total_20), 
+            state_rep_total_20 = sum(rep_total_20)) |>
+  filter(state_dem_total_20 > state_rep_total_20) |>
+  print()
+```
+
+## Exercise 10: New Data
+
+```{r}
+world_cup <- read.csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-11-29/worldcups.csv")
+```
+
+```{r}
+head(world_cup)
+```
+
+```{r}
+# In what years did Brazil win the World Cup?
+world_cup |> 
+  filter(winner == "Brazil") |>
+  print()
+```
+```{r}
+# What were the 6 World Cups with the highest attendance?
+world_cup |>
+  arrange(desc(attendance)) |>
+  top_n(6, attendance) |>
+  print()
+```
+
+```{r}
+# Construct a univariate plot of goals_scored (no wrangling necessary)
+# This provides a visual summary of how the number of goals_scored varies from World Cup to World Cup
+
+ggplot(world_cup, aes(x=goals_scored)) +
+  geom_histogram(binwidth = 5)
+```
+
+```{r}
+# Let's follow up the plot with some more precise numerical summaries
+# Calculate the min, median, and max number of goals_scored across all World Cups
+# NOTE: Visually compare these numerical summaries to what you observed in the plot
+
+min(world_cup$goals_scored) #70
+
+max(world_cup$goals_scored) #171
+
+mean(world_cup$goals_scored) #121.33
 
 ```
 
+```{r}
+# Construct a bivariate plot of how the number of goals_scored in the World Cup has changed over the years
+# No wrangling necessary
+
+ggplot(world_cup, aes(x=year, y=goals_scored)) +
+  geom_point() +
+  geom_smooth()
+
+```
+
+```{r}
+# Our above summaries might be a bit misleading.
+# The number of games played at the World Cup varies.
+# Construct a bivariate plot of how the typical number of goals per game has changed over the years
+
+world_cup |>
+  group_by(year) |>
+  summarize(avg_goals = mean(goals_scored)) |>
+    ggplot(aes(x=year, y=avg_goals)) +
+      geom_point() +
+      geom_smooth()
 
 
+```
 
+## Exercise 11: practice on my own data
 
-
-
-
-
-
+done :)
 
 
 
