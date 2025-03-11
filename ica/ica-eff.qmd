@@ -1,5 +1,5 @@
 ---
-title: "ica-eff"
+title: "Effective Viz"
 format: html
 ---
 
