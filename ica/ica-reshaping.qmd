@@ -4,16 +4,226 @@ format: html
 ---
 
 
-## Exercise 1
+## Exercise 1: What's the problem? 
 
 ```{r}
+library(tidyverse)
 sleep_wide <- read.csv("https://mac-stat.github.io/data/sleep_wide.csv")
 
 head(sleep_wide)
 ```
 
 ### Part a
-Units of observation are subject and then the day 
+Units of observation in sleep_wide are the subject and then the day the data was collected 
 
 ### Part b
-ggplot(sleep_wide, aes(y = ___, x = ___, color = ___))
+ggplot(sleep_wide, aes(y = day? , x = Subject, color = day_?))
+
+### Part c
+**Just sleep_wide**
+```{r}
+ggplot(sleep_wide, aes(y = day_1 , x = Subject, color = day_1)) + 
+  geom_point()
+```
+
+I don't think its possible to do any more than this
+
+**With pivot_longer()**
+
+```{r}
+sleep_wide |>
+  pivot_longer(cols=starts_with("day"), names_to="day", values_to="reaction_time")
+```
+
+**With pivot_wider**
+```{r}
+sleep_wide |>
+  pivot_wider(names_from=starts_with("day"), values_from=starts_with("day"))
+```
+not very useful...
+
+## Exercise 2: Pivot longer
+
+### Part a
+```{r}
+# For cols, try 2 appproaches: using - and starts_with
+sleep_wide |>
+  pivot_longer(cols = starts_with("day"), names_to = "day", values_to = "reaction_time")
+```
+### Part b
+```{r}
+sleep_long <- sleep_wide |>
+  pivot_longer(cols = -Subject,
+               names_to = "day",
+               names_prefix = "day_",
+               values_to = "reaction_time")
+
+head(sleep_long)
+```
+### Part c
+Using sleep_long, construct a line plot of reaction time vs day for each subject. This will look goofy no matter what you do. Why? HINT: look back at head(sleep_long). What class or type of variables are Subject and day? What do we want them to be?
+
+```{r}
+ggplot(sleep_long, aes(x=day, y=reaction_time)) +
+  geom_line()
+```
+Discrete/ categorical variables, making a line plot difficult. I'm not quite sure what we want them to be.
+
+## Exercise 3: Changing variable classes and plotting
+
+```{r}
+sleep_long <- sleep_wide |>
+  pivot_longer(cols = -Subject,
+               names_to = "day",
+               names_prefix = "day_",
+               values_to = "reaction_time") |> 
+  mutate(Subject = as.factor(Subject), day = as.numeric(day))
+
+# Check it out
+# Same data, different class
+head(sleep_long)
+```
+### Part a
+```{r, fig.height=5}
+# Make a line plot of reaction time by day for each subject
+# Put these all on the same frame
+ggplot(sleep_long, aes(x=day, y=reaction_time, color=Subject)) +
+  geom_line()
+```
+
+```{r}
+# Make a line plot of reaction time by day for each subject
+# Put these all on separate frames (one per subject)
+ggplot(sleep_long, aes(x=day, y=reaction_time)) +
+  geom_line() +
+  facet_wrap(~Subject)
+```
+### Part b
+General reaction time between reaction time and sleep is that as subjects moved further along in the study,  reaction time got slower. Some outliers show more variation (eg. 308 and 332), but this is the general trend. 
+
+## Exercise 4: Pivot_wider
+### Part a
+```{r}
+sleep_long |>
+  pivot_wider(names_from = "day", values_from = "reaction_time") |>
+  head()
+```
+Now the column labels do not show that the numbers correspond to days
+### Part b
+```{r}
+sleep_long |>
+  pivot_wider(names_from = "day", values_from = "reaction_time", names_prefix = "day_") |>
+  head()
+```
+
+## Exercise 5: Practice with Billboard charts
+```{r}
+# Load data
+library(tidyr)
+data("billboard")
+
+# Check it out
+head(billboard)
+```
+### Part a
+Construct and summarize a plot of how a song’s Billboard ranking its 2nd week on the chart (y-axis) is related to its ranking the 1st week on the charts (x-axis). Add a reference line geom_abline(intercept = 0, slope = 1). Songs above this line improved their rankings from the 1st to 2nd week.
+
+```{r}
+ggplot(billboard, aes(x=wk1, y=wk2)) +
+  geom_point() +
+  geom_abline(intercept = 0, slope = 1)
+```
+Many stayed at the same spot, and most others lowered except for a few outliers. 
+
+### Part b
+Use your wrangling tools to identify which songs are those above the line in Part a, i.e. with rankings that went up from week 1 to week 2.
+```{r}
+billboard |>
+  filter(wk2 > wk1) |>
+  head()
+```
+### Part c
+```{r}
+# Define nov_1999
+nov_1999 <- billboard %>%
+  filter(date.entered == "1999-11-06") |>
+  select(-track, -date.entered)
+
+# Confirm that nov_1999 has 2 rows (songs) and 77 columns
+dim(nov_1999)
+
+head(nov_1999)
+```
+
+### Part d
+```{r, fig.width=10}
+nov_1999 |>
+  pivot_longer(cols=starts_with("wk"), names_to = "week", values_to = "rank", names_prefix="wk") |>
+  ggplot(aes(x=as.numeric(week), y=rank, color = artist)) +
+  geom_point() +
+  geom_line()
+```
+
+## Exercise 6: Practice with the Daily Show
+
+```{r}
+library(fivethirtyeight)
+data("daily_show_guests")
+daily <- daily_show_guests
+```
+
+### Part a
+```{r}
+daily |>
+  group_by(raw_guest_list) |>
+  summarize(total_appearances = n()) |>
+  arrange(desc(total_appearances)) |>
+  head(15)
+```
+
+### Part b
+
+```{r}
+daily |>
+  filter(year >= 1999, year <= 2015) |>
+  group_by(raw_guest_list, year) |>
+  summarize(yearly_appearances = n()) |>
+  arrange(desc(yearly_appearances)) |>
+  head(15) |>
+  pivot_wider(names_from = year, values_from = yearly_appearances) |>
+  ungroup(raw_guest_list) |>
+  mutate(total_appearances = sum(2:11))
+  
+```
+I did my best I suppose... I was not able to figure out how to do this but have consulted the solutions section and now understand. 
+
+### Part c
+```{r}
+daily |> 
+  count(group)
+```
+```{r}
+plot_data <- daily |> 
+  mutate(broad_group = case_when(
+    group %in% c("Acting", "Athletics", "Comedy", "Musician") ~ "Acting, Comedy & Music",
+    group %in% c("Media", "media", "Science", "Academic", "Consultant", "Clergy") ~ "Media",
+    group %in% c("Politician", "Political Aide", "Government", "Military", "Business", "Advocacy") ~ "Government and Politics",
+    .default = NA
+  )) |> 
+  filter(!is.na(broad_group))
+
+head(plot_data)
+```
+
+```{r}
+plot_data |>
+  group_by(year, broad_group) |>
+  count() |>
+  ungroup(broad_group) |>
+  select(year, broad_group, n) |>
+  mutate(year_total = sum(n)) |>
+  mutate(percent = (n / year_total)*100) |>
+  ggplot(aes(x=year, y=percent, color=broad_group)) +
+  geom_line()
+
+```
