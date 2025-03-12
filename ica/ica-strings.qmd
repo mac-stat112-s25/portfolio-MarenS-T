@@ -1,0 +1,164 @@
+---
+title: "Strings"
+format: html
+---
+
+## Exercise 1: Time slots
+
+```{r}
+library(tidyverse)
+
+courses <- read.csv("https://mac-stat.github.io/data/registrar.csv")
+
+# Check it out
+head(courses)
+```
+
+```{r}
+# Construct a table that indicates the number of classes offered in each day/time slot
+# Print only the 6 most popular time slots
+
+courses |> 
+  group_by(days, time) |>
+  summarize(popular_times = n()) |>
+  arrange(desc(popular_times)) |> 
+  head()
+
+
+```
+
+## Exercise 2: Prep the Data
+
+So that we can analyze it later, we want to wrangle the courses data:
+
+Let’s get some enrollment info:
+- Split avail_max into 2 separate variables: avail and max. 
+- Use avail and max to define a new variable called enroll. HINT: You’ll need as.numeric()
+- Split the course number into 3 separate variables: dept, number, and section. HINT: You can use separate() to split a variable into 3, not just 2 new variables.
+Store this as courses_clean so that you can use it later.
+
+
+```{r}
+courses_clean <- courses |>
+  separate(avail_max, c("avail", "max"), sep = "/") |>
+  mutate(enroll = as.numeric(max) - as.numeric(avail)) |> 
+  separate(number, c("dept", "number", "section"))
+  
+```
+
+## Exercise 3: Courses by Department
+
+```{r}
+# Identify the 6 departments that offered the most sections
+courses_clean |> 
+  group_by(dept) |>
+  summarize (dept_classes = n()) |>
+  arrange(desc(dept_classes)) |>
+  head()
+
+# Identify the 6 departments with the longest average course titles
+courses_clean |>
+  mutate(course_name_length = str_length(name)) |>
+  group_by(dept) |>
+  summarize(dept_course_name_length = mean(course_name_length)) |>
+  arrange(desc(dept_course_name_length)) |>
+  head()
+  
+```
+## Exercise 4: STAT courses
+
+### Part a
+
+```{r}
+courses_clean |>
+  filter(instructor == "Alicia Johnson") |>
+  print()
+```
+
+### Part b
+
+```{r}
+stat <- courses_clean |> 
+  filter(dept == "STAT") |> 
+  mutate(name = str_remove(name, "Introduction to")) |>
+  mutate(name = str_replace(name, "Statistical", "Stat")) |> 
+  separate(time, "start_time", sep = "-") |>
+  select(number, name, start_time, enroll)
+
+print(stat)
+```
+
+## Exercise 5: More Cleaning
+
+```{r}
+enrollments <- courses_clean |>
+  filter(dept != "PE", dept != "INTD") |>
+  filter(!(dept == "MUSI" & as.numeric(number) < 100)) |>
+  mutate(section = str_remove(section, "L"))
+```
+
+## Exercise 6: Enrollment and departments 
+
+```{r, fig.height=5}
+
+enrollments |>
+  group_by(dept) |>
+  summarize(dept_total_enroll = sum(enroll)) |> 
+ggplot(aes(y=dept, x=dept_total_enroll)) +
+  geom_col()
+
+```
+```{r}
+enrollments |>
+  group_by(dept) |>
+  summarize(dept_total_enroll = sum(enroll)) |> 
+  arrange(desc(dept_total_enroll)) |>
+  head()
+```
+
+## Exercise 7: Enrollment and Faculty
+
+```{r}
+enrollments |>
+  filter(dept %in% c("STAT", "COMP"), number == 112, section == "01")
+```
+```{r}
+enrollments_2 <- enrollments |>
+  distinct(days, time, instructor, .keep_all = TRUE)
+
+# NOTE: By default this keeps the first department alphabetically
+# That's fine because we won't use this to analyze department enrollments!
+
+enrollments_2 |>
+  filter(instructor == "Brianna Heggeseth", name == "Introduction to Data Science")
+```
+```{r, fig.height=15}
+ggplot(enrollments_2, aes(y=instructor)) +
+    geom_bar()
+```
+Not ideal... let's just look at WGSS
+
+```{r}
+enrollments_2 |>
+  filter(dept == "WGSS") |>
+ggplot(aes(y=instructor)) +
+    geom_bar()
+```
+Are there only two instructors in WGSS? And did they each teach only one course? 
+
+```{r}
+enrollments_2 |>
+  filter(dept == "WGSS") |>
+  head()
+```
+indeed... 
+
+Then let's look at biology, one of the departments with the highest enrollment
+
+```{r, fig.height=6}
+enrollments_2 |>
+  filter(dept == "BIOL") |>
+ggplot(aes(y=instructor, fill = number)) +
+  geom_bar()
+```
+So there are this many teachers and they teach the courses corresponding to the colors! 
