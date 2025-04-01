@@ -223,7 +223,7 @@ colSums(is.na(imdb_messy))
 
 # Then count the number of NAs in a specific column
 imdb_messy |>
- colSums(is.na(actor_1_facebook_likes)))
+ filter(is.na(actor_1_facebook_likes))
 ```
 
 #### Part b {.unnumbered}
