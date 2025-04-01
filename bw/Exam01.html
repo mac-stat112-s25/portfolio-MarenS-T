@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.5.57">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>5&nbsp; Spatial Viz – COMP/STAT112 Notebook</title>
+<title>6&nbsp; Exam 01 – COMP/STAT112 Notebook</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -59,8 +59,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../bw/Exam01.html" rel="next">
-<link href="../bw/bw-quad.html" rel="prev">
+<link href="../bw/Exam02.html" rel="next">
+<link href="../bw/bw-spatial.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -97,32 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script><link rel="stylesheet" href="../style/custom.css">
+}</script><link rel="stylesheet" href="../style/custom.css">
 </head>
 <body class="nav-sidebar docked">
 
@@ -131,7 +106,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../bw/bw-uni.html">Best Work</a></li><li class="breadcrumb-item"><a href="../bw/bw-spatial.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spatial Viz</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../bw/bw-uni.html">Best Work</a></li><li class="breadcrumb-item"><a href="../bw/Exam01.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Exam 01</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -142,9 +117,7 @@ window.Quarto = {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">
-      Maren Stewart-Tanner
-      </a> 
+      <a href="../">Maren Stewart-Tanner</a> 
         <div class="sidebar-tools-main">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
@@ -203,13 +176,13 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../bw/bw-spatial.html" class="sidebar-item-text sidebar-link active">
+  <a href="../bw/bw-spatial.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spatial Viz</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../bw/Exam01.html" class="sidebar-item-text sidebar-link">
+  <a href="../bw/Exam01.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Exam 01</span></span></a>
   </div>
 </li>
@@ -306,9 +279,9 @@ window.Quarto = {
         
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../bw/bw-uni.html">Best Work</a></li><li class="breadcrumb-item"><a href="../bw/bw-spatial.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spatial Viz</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../bw/bw-uni.html">Best Work</a></li><li class="breadcrumb-item"><a href="../bw/Exam01.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Exam 01</span></a></li></ol></nav><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">
-<span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spatial Viz</span>
+<span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Exam 01</span>
 </h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
@@ -323,10 +296,9 @@ window.Quarto = {
   
 
 
-</header><p>Use this file to generate a professional looking <strong>spatial</strong> visualization. The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.</p>
+</header><p><strong>Grand Research Question: </strong> What does the conusmption of each food category in each country look like?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Load required libraries</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
@@ -339,248 +311,119 @@ window.Quarto = {
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(openintro)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: airports
-Loading required package: cherryblossom
-Loading required package: usdata</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(mosaic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Registered S3 method overwritten by 'mosaic':
-  method                           from   
-  fortify.SpatialPolygonsDataFrame ggplot2
-
-The 'mosaic' package masks several functions from core packages in order to add 
-additional features.  The original behavior of these functions should not be affected by this.
-
-Attaching package: 'mosaic'
-
-The following object is masked from 'package:Matrix':
-
-    mean
-
-The following object is masked from 'package:openintro':
-
-    dotPlot
-
-The following objects are masked from 'package:dplyr':
-
-    count, do, tally
-
-The following object is masked from 'package:purrr':
-
-    cross
-
-The following object is masked from 'package:ggplot2':
-
-    stat
-
-The following objects are masked from 'package:stats':
-
-    binom.test, cor, cor.test, cov, fivenum, IQR, median, prop.test,
-    quantile, sd, t.test, var
-
-The following objects are masked from 'package:base':
-
-    max, mean, min, prod, range, sample, sum</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Linking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">library</span>(rnaturalearth)</span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">library</span>(maps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'maps'
-
-The following object is masked from 'package:purrr':
-
-    map</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">library</span>(rmarkdown)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(tidytuesdayR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Import starbucks location data</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>starbucks <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://mac-stat.github.io/data/starbucks.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>starbucks_us_by_state <span class="ot">&lt;-</span> starbucks <span class="sc">|&gt;</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">filter</span>(Country <span class="sc">==</span> <span class="st">"US"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">count</span>(State.Province) <span class="sc">|&gt;</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">mutate</span>(<span class="at">state_name =</span> <span class="fu">str_to_lower</span>(<span class="fu">abbr2state</span>(State.Province)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>census_pop_est_2018 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://mac-stat.github.io/data/us_census_2018_state_pop_est.csv"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">separate</span>(state, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"dot"</span>, <span class="st">"state"</span>), <span class="at">extra =</span> <span class="st">"merge"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">select</span>(<span class="sc">-</span>dot) <span class="sc">|&gt;</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">mutate</span>(<span class="at">state =</span> <span class="fu">str_to_lower</span>(state))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>tuesdata <span class="ot">&lt;-</span> <span class="fu">tt_load</span>(<span class="st">'2020-02-18'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 51 Columns: 2
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (1): state
-dbl (1): est_pop_2018
+<pre><code>---- Compiling #TidyTuesday Information for 2020-02-18 ----
+--- There is 1 file available ---
 
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>starbucks_with_2018_pop_est <span class="ot">&lt;-</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>  starbucks_us_by_state <span class="sc">|&gt;</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">left_join</span>(census_pop_est_2018,</span>
-<span id="cb16-4"><a href="#cb16-4"></a>    <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"state_name"</span> <span class="ot">=</span> <span class="st">"state"</span>)</span>
-<span id="cb16-5"><a href="#cb16-5"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb16-6"><a href="#cb16-6"></a>  <span class="fu">mutate</span>(<span class="at">starbucks_per_10000 =</span> (n <span class="sc">/</span> est_pop_2018) <span class="sc">*</span> <span class="dv">10000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>states_map <span class="ot">&lt;-</span> <span class="fu">map_data</span>(<span class="st">"state"</span>)</span>
-<span id="cb17-2"><a href="#cb17-2"></a></span>
-<span id="cb17-3"><a href="#cb17-3"></a>starbucks_us <span class="ot">&lt;-</span> starbucks <span class="sc">|&gt;</span> </span>
-<span id="cb17-4"><a href="#cb17-4"></a>  <span class="fu">filter</span>(Country <span class="sc">==</span> <span class="st">"US"</span>)</span>
-<span id="cb17-5"><a href="#cb17-5"></a></span>
-<span id="cb17-6"><a href="#cb17-6"></a><span class="fu">library</span>(RColorBrewer)</span>
-<span id="cb17-7"><a href="#cb17-7"></a><span class="co"># scale_fill_manual(values = rev(brewer.pal(8,"PRGn")))</span></span>
-<span id="cb17-8"><a href="#cb17-8"></a></span>
-<span id="cb17-9"><a href="#cb17-9"></a><span class="fu">library</span>(viridis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: viridisLite</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'viridis'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:maps':
 
-    unemp</code></pre>
+── Downloading files ───────────────────────────────────────────────────────────
+
+  1 of 1: "food_consumption.csv"</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">ggplot</span>(starbucks_with_2018_pop_est, <span class="fu">aes</span>(<span class="at">map_id =</span> state_name, <span class="at">fill =</span> starbucks_per_10000)) <span class="sc">+</span> </span>
-<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">geom_map</span>(<span class="at">map =</span> states_map) <span class="sc">+</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a>    <span class="fu">geom_point</span>(</span>
-<span id="cb21-4"><a href="#cb21-4"></a>    <span class="at">data =</span> starbucks_us,</span>
-<span id="cb21-5"><a href="#cb21-5"></a>    <span class="fu">aes</span>(<span class="at">x =</span> Longitude, <span class="at">y =</span> Latitude),</span>
-<span id="cb21-6"><a href="#cb21-6"></a>    <span class="at">size =</span> <span class="fl">0.05</span>,</span>
-<span id="cb21-7"><a href="#cb21-7"></a>    <span class="at">alpha =</span> <span class="fl">0.2</span>,</span>
-<span id="cb21-8"><a href="#cb21-8"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb21-9"><a href="#cb21-9"></a>    <span class="at">color=</span><span class="st">"pink"</span>) <span class="sc">+</span></span>
-<span id="cb21-10"><a href="#cb21-10"></a>    <span class="fu">ggtitle</span>(<span class="st">"Starbucks by 10,000"</span>, <span class="at">subtitle =</span> <span class="st">"Density of Starbucks locations per 10,000 people by state"</span>) <span class="sc">+</span></span>
-<span id="cb21-11"><a href="#cb21-11"></a>  <span class="fu">expand_limits</span>(<span class="at">x =</span> states_map<span class="sc">$</span>long, <span class="at">y =</span> states_map<span class="sc">$</span>lat) <span class="sc">+</span></span>
-<span id="cb21-12"><a href="#cb21-12"></a>  <span class="fu">scale_fill_viridis</span>(<span class="at">option =</span> <span class="st">"viridis"</span>) <span class="sc">+</span></span>
-<span id="cb21-13"><a href="#cb21-13"></a>  <span class="fu">theme_map</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">dim</span>(tuesdata[[<span class="st">"food_consumption"</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1430    4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>food_consumption <span class="ot">&lt;-</span> tuesdata[[<span class="st">"food_consumption"</span>]]</span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="fu">head</span>(food_consumption, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 4
+   country   food_category            consumption co2_emmission
+   &lt;chr&gt;     &lt;chr&gt;                          &lt;dbl&gt;         &lt;dbl&gt;
+ 1 Argentina Pork                           10.5          37.2 
+ 2 Argentina Poultry                        38.7          41.5 
+ 3 Argentina Beef                           55.5        1712   
+ 4 Argentina Lamb &amp; Goat                     1.56         54.6 
+ 5 Argentina Fish                            4.36          6.96
+ 6 Argentina Eggs                           11.4          10.5 
+ 7 Argentina Milk - inc. cheese            195.          278.  
+ 8 Argentina Wheat and Wheat Products      103.           19.7 
+ 9 Argentina Rice                            8.77         11.2 
+10 Argentina Soybeans                        0             0   </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">class</span>(food_consumption)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "spec_tbl_df" "tbl_df"      "tbl"         "data.frame" </code></pre>
+</div>
+</div>
+<p><strong>Understand Variables Individually</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">ggplot</span>(food_consumption, <span class="fu">aes</span>(<span class="at">y=</span>country)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="bw-spatial_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" alt="Chloropleth map showing the density of Starbucks locations for every 10,000 people; more densely populated cities have fewer starbuck locations per 10000, but the most actual store locations." width="672"></p>
-<figcaption>Created by Maren Stewart-Tanner, February 2025, source: https://mac-stat.github.io/data/starbucks.csv</figcaption></figure>
+<div>
+<figure class="figure"><p><img src="Exam01_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
 </div>
-<pre><code>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">ggplot</span>(food_consumption, <span class="fu">aes</span>(<span class="at">y=</span>food_category)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="Exam01_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">ggplot</span>(food_consumption, <span class="fu">aes</span>(<span class="at">x=</span>consumption)) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="Exam01_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Count of each country and food category the same across all data points; consumption in general lies around the 15 point.</p>
+<p><strong>Understand Consumption</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">ggplot</span>(food_consumption, <span class="fu">aes</span>(<span class="at">fill=</span>food_category, <span class="at">x=</span>consumption)) <span class="sc">+</span> </span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="Exam01_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">ggplot</span>(food_consumption, <span class="fu">aes</span>(<span class="at">fill=</span>country, <span class="at">x=</span>consumption)) <span class="sc">+</span> </span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="Exam01_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="1056"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>These data are so large that it is difficult to visualize them.</p>
+<p><strong>Answering Grand RQ</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">ggplot</span>(food_consumption, <span class="fu">aes</span>(<span class="at">fill=</span>country, <span class="at">x=</span>consumption)) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> <span class="st">"food_category"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="Exam01_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="2112"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>I struggled quite a bit with finding an appropriate viz as the data points being examined are so large</p>
 
 
+<!-- -->
 
-
-:::{#quarto-navigation-envelope .hidden}
-[Maren Stewart-Tanner]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar-title"}
-[COMP/STAT112 Notebook]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-navbar-title"}
-[&lt;span class='chapter-number'&gt;6&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Exam 01&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-next"}
-[&lt;span class='chapter-number'&gt;4&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Quadvariate Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-prev"}
-[Welcome]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:/index.htmlWelcome"}
-[Best Work]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:quarto-sidebar-section-1"}
-[&lt;span class='chapter-number'&gt;1&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Univariate Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:/bw/bw-uni.html&lt;span-class='chapter-number'&gt;1&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Univariate-Viz&lt;/span&gt;"}
-[&lt;span class='chapter-number'&gt;2&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Bivariate Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:/bw/bw-bi.html&lt;span-class='chapter-number'&gt;2&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Bivariate-Viz&lt;/span&gt;"}
-[&lt;span class='chapter-number'&gt;3&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Trivariate Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:/bw/bw-tri.html&lt;span-class='chapter-number'&gt;3&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Trivariate-Viz&lt;/span&gt;"}
-[&lt;span class='chapter-number'&gt;4&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Quadvariate Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:/bw/bw-quad.html&lt;span-class='chapter-number'&gt;4&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Quadvariate-Viz&lt;/span&gt;"}
-[&lt;span class='chapter-number'&gt;5&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Spatial Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:/bw/bw-spatial.html&lt;span-class='chapter-number'&gt;5&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Spatial-Viz&lt;/span&gt;"}
-[&lt;span class='chapter-number'&gt;6&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Exam 01&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:/bw/Exam01.html&lt;span-class='chapter-number'&gt;6&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Exam-01&lt;/span&gt;"}
-[&lt;span class='chapter-number'&gt;7&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Exam 2: Food Consumption 2&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:/bw/Exam02.html&lt;span-class='chapter-number'&gt;7&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Exam-2:-Food-Consumption-2&lt;/span&gt;"}
-[In-class Activities]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:quarto-sidebar-section-2"}
-[&lt;span class='chapter-number'&gt;8&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Univariate Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:/ica/ica-uni.html&lt;span-class='chapter-number'&gt;8&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Univariate-Viz&lt;/span&gt;"}
-[&lt;span class='chapter-number'&gt;9&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Bivariate Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:/ica/ica-bi.html&lt;span-class='chapter-number'&gt;9&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Bivariate-Viz&lt;/span&gt;"}
-[&lt;span class='chapter-number'&gt;10&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Mulivariate Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:/ica/ica-multi.html&lt;span-class='chapter-number'&gt;10&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Mulivariate-Viz&lt;/span&gt;"}
-[&lt;span class='chapter-number'&gt;11&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Spatial Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:/ica/ica-spatial.html&lt;span-class='chapter-number'&gt;11&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Spatial-Viz&lt;/span&gt;"}
-[&lt;span class='chapter-number'&gt;12&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Effective Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:/ica/ica-eff.html&lt;span-class='chapter-number'&gt;12&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Effective-Viz&lt;/span&gt;"}
-[&lt;span class='chapter-number'&gt;13&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Wrangling&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:/ica/ica-wrangling.html&lt;span-class='chapter-number'&gt;13&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Wrangling&lt;/span&gt;"}
-[&lt;span class='chapter-number'&gt;14&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Dates&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:/ica/ica-dates.html&lt;span-class='chapter-number'&gt;14&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Dates&lt;/span&gt;"}
-[&lt;span class='chapter-number'&gt;15&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Reshaping&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:/ica/ica-reshaping.html&lt;span-class='chapter-number'&gt;15&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Reshaping&lt;/span&gt;"}
-[&lt;span class='chapter-number'&gt;16&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Joining&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:/ica/ica-joining.html&lt;span-class='chapter-number'&gt;16&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Joining&lt;/span&gt;"}
-[&lt;span class='chapter-number'&gt;17&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Strings&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:/ica/ica-strings.html&lt;span-class='chapter-number'&gt;17&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Strings&lt;/span&gt;"}
-[&lt;span class='chapter-number'&gt;18&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;ica-import&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:/ica/ica-import.html&lt;span-class='chapter-number'&gt;18&lt;/span&gt;--&lt;span-class='chapter-title'&gt;ica-import&lt;/span&gt;"}
-[Best Work]{.hidden .quarto-markdown-envelope-contents render-id="quarto-breadcrumbs-Best-Work"}
-[&lt;span class='chapter-number'&gt;5&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Spatial Viz&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-breadcrumbs-&lt;span-class='chapter-number'&gt;5&lt;/span&gt;--&lt;span-class='chapter-title'&gt;Spatial-Viz&lt;/span&gt;"}
-:::
-
-
-
-:::{#quarto-meta-markdown .hidden}
-[[5]{.chapter-number}&nbsp; [Spatial Viz]{.chapter-title} – COMP/STAT112 Notebook]{.hidden .quarto-markdown-envelope-contents render-id="quarto-metatitle"}
-[[5]{.chapter-number}&nbsp; [Spatial Viz]{.chapter-title} – COMP/STAT112 Notebook]{.hidden .quarto-markdown-envelope-contents render-id="quarto-twittercardtitle"}
-[[5]{.chapter-number}&nbsp; [Spatial Viz]{.chapter-title} – COMP/STAT112 Notebook]{.hidden .quarto-markdown-envelope-contents render-id="quarto-ogcardtitle"}
-[COMP/STAT112 Notebook]{.hidden .quarto-markdown-envelope-contents render-id="quarto-metasitename"}
-[]{.hidden .quarto-markdown-envelope-contents render-id="quarto-twittercarddesc"}
-[]{.hidden .quarto-markdown-envelope-contents render-id="quarto-ogcardddesc"}
-:::
-
-
-
-
-&lt;!-- --&gt;
-
-::: {.quarto-embedded-source-code}
-```````````````````{.markdown shortcodes="false"}
----
-title: "Spatial Viz"
----
-
-Use this file to generate a professional looking **spatial** visualization.  The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.
-
-quarto-executable-code-5450563D
-
-```r
-# Load required libraries
-library(tidyverse)
-library(openintro)
-library(mosaic)
-library(sf)
-library(rnaturalearth)
-library(maps)
-library(rmarkdown)</code></pre>
-<p>quarto-executable-code-5450563D</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># Import starbucks location data</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a>starbucks <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://mac-stat.github.io/data/starbucks.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>quarto-executable-code-5450563D</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>starbucks_us_by_state <span class="ot">&lt;-</span> starbucks <span class="sc">|&gt;</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a>  <span class="fu">filter</span>(Country <span class="sc">==</span> <span class="st">"US"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb24-3"><a href="#cb24-3"></a>  <span class="fu">count</span>(State.Province) <span class="sc">|&gt;</span></span>
-<span id="cb24-4"><a href="#cb24-4"></a>  <span class="fu">mutate</span>(<span class="at">state_name =</span> <span class="fu">str_to_lower</span>(<span class="fu">abbr2state</span>(State.Province)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>quarto-executable-code-5450563D</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>census_pop_est_2018 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://mac-stat.github.io/data/us_census_2018_state_pop_est.csv"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">separate</span>(state, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"dot"</span>, <span class="st">"state"</span>), <span class="at">extra =</span> <span class="st">"merge"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">select</span>(<span class="sc">-</span>dot) <span class="sc">|&gt;</span></span>
-<span id="cb25-4"><a href="#cb25-4"></a>  <span class="fu">mutate</span>(<span class="at">state =</span> <span class="fu">str_to_lower</span>(state))</span>
-<span id="cb25-5"><a href="#cb25-5"></a></span>
-<span id="cb25-6"><a href="#cb25-6"></a>starbucks_with_2018_pop_est <span class="ot">&lt;-</span></span>
-<span id="cb25-7"><a href="#cb25-7"></a>  starbucks_us_by_state <span class="sc">|&gt;</span></span>
-<span id="cb25-8"><a href="#cb25-8"></a>  <span class="fu">left_join</span>(census_pop_est_2018,</span>
-<span id="cb25-9"><a href="#cb25-9"></a>    <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"state_name"</span> <span class="ot">=</span> <span class="st">"state"</span>)</span>
-<span id="cb25-10"><a href="#cb25-10"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb25-11"><a href="#cb25-11"></a>  <span class="fu">mutate</span>(<span class="at">starbucks_per_10000 =</span> (n <span class="sc">/</span> est_pop_2018) <span class="sc">*</span> <span class="dv">10000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>quarto-executable-code-5450563D</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>states_map <span class="ot">&lt;-</span> <span class="fu">map_data</span>(<span class="st">"state"</span>)</span>
-<span id="cb26-2"><a href="#cb26-2"></a></span>
-<span id="cb26-3"><a href="#cb26-3"></a>starbucks_us <span class="ot">&lt;-</span> starbucks <span class="sc">|&gt;</span> </span>
-<span id="cb26-4"><a href="#cb26-4"></a>  <span class="fu">filter</span>(Country <span class="sc">==</span> <span class="st">"US"</span>)</span>
-<span id="cb26-5"><a href="#cb26-5"></a></span>
-<span id="cb26-6"><a href="#cb26-6"></a><span class="fu">library</span>(RColorBrewer)</span>
-<span id="cb26-7"><a href="#cb26-7"></a><span class="co"># scale_fill_manual(values = rev(brewer.pal(8,"PRGn")))</span></span>
-<span id="cb26-8"><a href="#cb26-8"></a></span>
-<span id="cb26-9"><a href="#cb26-9"></a><span class="fu">library</span>(viridis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>```{r fig.cap = “Created by Maren Stewart-Tanner, February 2025, source: https://mac-stat.github.io/data/starbucks.csv”} #| fig-alt: “Chloropleth map showing the density of Starbucks locations for every 10,000 people; more densely populated cities have fewer starbuck locations per 10000, but the most actual store locations.”</p>
-<p>ggplot(starbucks_with_2018_pop_est, aes(map_id = state_name, fill = starbucks_per_10000)) + geom_map(map = states_map) + geom_point( data = starbucks_us, aes(x = Longitude, y = Latitude), size = 0.05, alpha = 0.2, inherit.aes = FALSE, color=“pink”) + ggtitle(“Starbucks by 10,000”, subtitle = “Density of Starbucks locations per 10,000 people by state”) + expand_limits(x = states_map<span class="math inline">\(long, y = states_map\)</span>lat) + scale_fill_viridis(option = “viridis”) + theme_map()</p>
-<pre><code></code></pre>
-<p>``````````````````` :::</p>
 
 </main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1202,16 +1045,101 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../bw/bw-quad.html" class="pagination-link" aria-label="Quadvariate Viz">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Quadvariate Viz</span></span>
+      <a href="../bw/bw-spatial.html" class="pagination-link" aria-label="Spatial Viz">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spatial Viz</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../bw/Exam01.html" class="pagination-link" aria-label="Exam 01">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Exam 01</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../bw/Exam02.html" class="pagination-link" aria-label="Exam 2: Food Consumption 2">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exam 2: Food Consumption 2</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb18" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1"></a><span class="co">---</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="an">title:</span><span class="co"> "Exam 01"</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="co">---</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a></span>
+<span id="cb18-6"><a href="#cb18-6"></a>**Grand Research Question: **</span>
+<span id="cb18-7"><a href="#cb18-7"></a>What does the conusmption of each food category in each country look like? </span>
+<span id="cb18-8"><a href="#cb18-8"></a></span>
+<span id="cb18-11"><a href="#cb18-11"></a><span class="in">```{r}</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb18-13"><a href="#cb18-13"></a><span class="fu">library</span>(tidytuesdayR)</span>
+<span id="cb18-14"><a href="#cb18-14"></a><span class="in">```</span></span>
+<span id="cb18-15"><a href="#cb18-15"></a></span>
+<span id="cb18-18"><a href="#cb18-18"></a><span class="in">```{r}</span></span>
+<span id="cb18-19"><a href="#cb18-19"></a>tuesdata <span class="ot">&lt;-</span> <span class="fu">tt_load</span>(<span class="st">'2020-02-18'</span>)</span>
+<span id="cb18-20"><a href="#cb18-20"></a><span class="in">```</span></span>
+<span id="cb18-21"><a href="#cb18-21"></a></span>
+<span id="cb18-22"><a href="#cb18-22"></a></span>
+<span id="cb18-25"><a href="#cb18-25"></a><span class="in">```{r}</span></span>
+<span id="cb18-26"><a href="#cb18-26"></a><span class="fu">dim</span>(tuesdata[[<span class="st">"food_consumption"</span>]])</span>
+<span id="cb18-27"><a href="#cb18-27"></a></span>
+<span id="cb18-28"><a href="#cb18-28"></a>food_consumption <span class="ot">&lt;-</span> tuesdata[[<span class="st">"food_consumption"</span>]]</span>
+<span id="cb18-29"><a href="#cb18-29"></a></span>
+<span id="cb18-30"><a href="#cb18-30"></a><span class="fu">head</span>(food_consumption, <span class="dv">10</span>)</span>
+<span id="cb18-31"><a href="#cb18-31"></a></span>
+<span id="cb18-32"><a href="#cb18-32"></a><span class="fu">class</span>(food_consumption)</span>
+<span id="cb18-33"><a href="#cb18-33"></a><span class="in">```</span></span>
+<span id="cb18-34"><a href="#cb18-34"></a></span>
+<span id="cb18-35"><a href="#cb18-35"></a>**Understand Variables Individually**</span>
+<span id="cb18-38"><a href="#cb18-38"></a><span class="in">```{r}</span></span>
+<span id="cb18-39"><a href="#cb18-39"></a><span class="fu">ggplot</span>(food_consumption, <span class="fu">aes</span>(<span class="at">y=</span>country)) <span class="sc">+</span></span>
+<span id="cb18-40"><a href="#cb18-40"></a>  <span class="fu">geom_bar</span>()</span>
+<span id="cb18-41"><a href="#cb18-41"></a><span class="in">```</span></span>
+<span id="cb18-42"><a href="#cb18-42"></a></span>
+<span id="cb18-43"><a href="#cb18-43"></a></span>
+<span id="cb18-46"><a href="#cb18-46"></a><span class="in">```{r}</span></span>
+<span id="cb18-47"><a href="#cb18-47"></a><span class="fu">ggplot</span>(food_consumption, <span class="fu">aes</span>(<span class="at">y=</span>food_category)) <span class="sc">+</span></span>
+<span id="cb18-48"><a href="#cb18-48"></a>  <span class="fu">geom_bar</span>()</span>
+<span id="cb18-49"><a href="#cb18-49"></a><span class="in">```</span></span>
+<span id="cb18-50"><a href="#cb18-50"></a></span>
+<span id="cb18-53"><a href="#cb18-53"></a><span class="in">```{r}</span></span>
+<span id="cb18-54"><a href="#cb18-54"></a><span class="fu">ggplot</span>(food_consumption, <span class="fu">aes</span>(<span class="at">x=</span>consumption)) <span class="sc">+</span></span>
+<span id="cb18-55"><a href="#cb18-55"></a>  <span class="fu">geom_density</span>()</span>
+<span id="cb18-56"><a href="#cb18-56"></a><span class="in">```</span></span>
+<span id="cb18-57"><a href="#cb18-57"></a></span>
+<span id="cb18-58"><a href="#cb18-58"></a>Count of each country and food category the same across all data points; consumption in general lies around the 15 point. </span>
+<span id="cb18-59"><a href="#cb18-59"></a></span>
+<span id="cb18-60"><a href="#cb18-60"></a>**Understand Consumption**</span>
+<span id="cb18-61"><a href="#cb18-61"></a></span>
+<span id="cb18-64"><a href="#cb18-64"></a><span class="in">```{r}</span></span>
+<span id="cb18-65"><a href="#cb18-65"></a><span class="fu">ggplot</span>(food_consumption, <span class="fu">aes</span>(<span class="at">fill=</span>food_category, <span class="at">x=</span>consumption)) <span class="sc">+</span> </span>
+<span id="cb18-66"><a href="#cb18-66"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>)</span>
+<span id="cb18-67"><a href="#cb18-67"></a><span class="in">```</span></span>
+<span id="cb18-68"><a href="#cb18-68"></a></span>
+<span id="cb18-71"><a href="#cb18-71"></a><span class="in">```{r}</span></span>
+<span id="cb18-72"><a href="#cb18-72"></a><span class="co">#| fig-height: 22</span></span>
+<span id="cb18-73"><a href="#cb18-73"></a><span class="co">#| fig-width: 11</span></span>
+<span id="cb18-74"><a href="#cb18-74"></a><span class="fu">ggplot</span>(food_consumption, <span class="fu">aes</span>(<span class="at">fill=</span>country, <span class="at">x=</span>consumption)) <span class="sc">+</span> </span>
+<span id="cb18-75"><a href="#cb18-75"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>)</span>
+<span id="cb18-76"><a href="#cb18-76"></a><span class="in">```</span></span>
+<span id="cb18-77"><a href="#cb18-77"></a>These data are so large that it is difficult to visualize them. </span>
+<span id="cb18-78"><a href="#cb18-78"></a></span>
+<span id="cb18-79"><a href="#cb18-79"></a>**Answering Grand RQ**</span>
+<span id="cb18-82"><a href="#cb18-82"></a><span class="in">```{r}</span></span>
+<span id="cb18-83"><a href="#cb18-83"></a><span class="co">#| fig-height: 22</span></span>
+<span id="cb18-84"><a href="#cb18-84"></a><span class="co">#| fig-width: 22</span></span>
+<span id="cb18-85"><a href="#cb18-85"></a><span class="fu">ggplot</span>(food_consumption, <span class="fu">aes</span>(<span class="at">fill=</span>country, <span class="at">x=</span>consumption)) <span class="sc">+</span></span>
+<span id="cb18-86"><a href="#cb18-86"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb18-87"><a href="#cb18-87"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> <span class="st">"food_category"</span>)</span>
+<span id="cb18-88"><a href="#cb18-88"></a><span class="in">```</span></span>
+<span id="cb18-89"><a href="#cb18-89"></a>I struggled quite a bit with finding an appropriate viz as the data points being examined are so large</span>
+<span id="cb18-90"><a href="#cb18-90"></a></span>
+<span id="cb18-91"><a href="#cb18-91"></a></span>
+<span id="cb18-92"><a href="#cb18-92"></a></span>
+<span id="cb18-93"><a href="#cb18-93"></a></span>
+<span id="cb18-94"><a href="#cb18-94"></a></span>
+<span id="cb18-95"><a href="#cb18-95"></a></span>
+<span id="cb18-96"><a href="#cb18-96"></a></span>
+<span id="cb18-97"><a href="#cb18-97"></a></span>
+<span id="cb18-98"><a href="#cb18-98"></a></span>
+<span id="cb18-99"><a href="#cb18-99"></a></span>
+<span id="cb18-100"><a href="#cb18-100"></a></span>
+<span id="cb18-101"><a href="#cb18-101"></a></span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 
 
