@@ -1,0 +1,70 @@
+---
+title: "Solo Project"
+format: html
+---
+## Process
+
+### Data set import
+```{r}
+library(tidyverse)
+library(rnaturalearth)
+library(sf)
+library(socviz)
+library(viridis)
+data
+#Import Real Estate dataset
+
+GA_real_estate <- read_csv("../data/RealEstate_Georgia.csv")
+```
+
+### Info on data set: 
+
+Link: https://www.kaggle.com/datasets/yellowj4acket/real-estate-georgia?resource=download
+
+Source: Kaggle
+
+Creator: Kaggle user yellowj4acket in association with another user. Here is the description provided: 
+
+***"This dataset is a co-production, thanks to my fellow mate Jordan for building a great comprehensive US dataset from which I could filter this."***
+
+### Importing map file
+```{r}
+library(sf)
+
+read_sf('../data/cb_2018_us_county_5m/cb_2018_us_county_5m.shp')
+```
+
+```{r}
+geom_with_county_names <- read_sf('../data/Counties2018.shp/Counties2018.shp')
+```
+### Wrangling
+```{r}
+take2_boundaries_GA_real_estate <- GA_real_estate |>
+  group_by(county) |>
+  summarize(houses_count = n()) |>
+  ungroup() |>
+  select(county, houses_count) |>
+  left_join(geom_with_county_names, join_by(county == NAMELSAD))
+ 
+```
+
+```{r}
+take2_boundaries_GA_real_estate <- st_as_sf(take2_boundaries_GA_real_estate) 
+```
+
+
+## Final Plot 
+
+```{r fig.cap = "Number of houses that went up for sale from the first 6 months in 2021 in the state of GA in the United States; data from kaggle, Visualization created by Maren Stewart-Tanner"}
+
+#| fig-alt: "Chloropleth map showing density of homes for sale in GA USA. Number of houses ranges from below 300 to over 900, with the most concentrated around the Atlanta metropolitan area and to a lesser extent the area of Savannah. The county with the most houses for sale is Fulton County."
+
+ggplot(take2_boundaries_GA_real_estate, aes(fill = houses_count)) +
+  geom_sf() +
+  scale_fill_viridis_c(option = "H") +
+  labs(fill = "Number of Houses", title = "Houses for Sale per County in GA")
+  
+```
+
+
+
