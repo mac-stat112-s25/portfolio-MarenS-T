@@ -1,4 +1,4 @@
-Timestamp,What is the date? ,What is the time? ,I feel well rested,I feel very stressed,I feel very overwhelmed,Have you consumed caffeine today? ,Approximately how much sleep did you get? ,Have any remarkable events occurred today that may skew these results? 
+Timestamp,date,time_of_day,rest_level,stress_level,overwhelm,caffeine,sleep_amount,skew
 3/26/2025 19:50:51,3/26/2025,7 PM,Neutral,Neutral,Neutral,Yes,7-8 hours,Delete! This is a test run
 3/27/2025 9:10:47,3/27/2025,9 AM,Agree,Disagree,Disagree,No,7-8 hours,
 3/27/2025 14:01:00,3/27/2025,2 PM,Agree,Disagree,Disagree,Yes,7-8 hours,

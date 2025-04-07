@@ -1,0 +1,114 @@
+---
+title: "Pysch Self Study"
+format: html
+---
+
+```{r}
+library(tidyverse)
+library(tibble)
+
+day_end <- read_csv('../data/psych/End of day survey (Responses) (1)  - Form Responses 1.csv')
+
+four_daily <- read_csv('../data/psych/4x daily Stress Questionnaire (Responses) (1) - Form Responses 1.csv')
+```
+
+```{r}
+four_daily <- four_daily |>
+  mutate(rest_level = fct_recode(rest_level,
+                                 "5" = "Strongly Agree",
+                                 "4" = "Agree",
+                                 "3" = "Neutral", 
+                                 "2" = "Disagree",
+                                 "1" = "Strongly Disagree")) |>
+  mutate(stress_level = fct_recode(stress_level,
+                                 "1" = "Strongly Agree",
+                                 "2" = "Agree",
+                                 "3" = "Neutral", 
+                                 "4" = "Disagree",
+                                 "5" = "Strongly Disagree")) |>
+  mutate(overwhelm = fct_recode(overwhelm,
+                                 "1" = "Strongly agree",
+                                 "2" = "Agree",
+                                 "3" = "Neutral", 
+                                 "4" = "Disagree",
+                                 "5" = "Strongly Disagree"))
+```
+
+```{r}
+four_daily <- four_daily |>
+  mutate(rest_level = as.numeric(rest_level)) |>
+  mutate(stress_level = as.numeric(stress_level)) |>
+  mutate(overwhelm = as.numeric(overwhelm)) |>
+  filter(date != "3/26/2025")
+```
+
+```{r}
+day_end <- day_end |>
+  select(!Timestamp)
+```
+
+```{r}
+day_complete <- four_daily |>
+  left_join(day_end)
+```
+```{r}
+only_data <- day_complete |>
+  group_by(date) |>
+  mutate(mean_rest = mean(rest_level),
+        mean_stress = mean(stress_level),
+        mean_overwhelm = mean(overwhelm)) |>
+  select(date, mean_rest, mean_stress, mean_overwhelm, caffeine, sleep_amount, piles_present)
+```
+
+```{r}
+data_means <- only_data |>
+  group_by(date) |>
+  summarize(mean_rest = mean(mean_rest),
+            mean_stress = mean(mean_stress),
+            mean_overwhelm = mean(mean_overwhelm)) |>
+  ungroup() |>
+  mutate(mean_rest = as.numeric(mean_rest)) |>
+  mutate(mean_stress = as.numeric(mean_stress)) |>
+  mutate(mean_overwhelm = as.numeric(mean_overwhelm)) 
+```
+
+```{r}
+ggplot(data_means, aes(x=date, y = mean_rest, group = mean_rest)) +
+  geom_() 
+
+
+
+
+
+
+  # geom_point(aes(y=mean_stress, color = "mean_stress")) +
+  # geom_point(aes(y=mean_overwhelm, color = "mean_overwhelm"))
+```
+
+
+```{r}
+long_data_means <- data_means |>
+  pivot_longer(cols = starts_with("mean"), names_to = "data_point", values_to = "values") 
+
+ggplot(long_data_means, aes(x = date, y = values, color = data_point)) +
+  geom_point() 
+  
+```
+
+```{r}
+as.Date("day_complete$date", format("%m, %d, %Y"))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+

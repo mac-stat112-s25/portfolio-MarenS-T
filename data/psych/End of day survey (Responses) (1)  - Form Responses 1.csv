@@ -1,4 +1,4 @@
-Timestamp,Date,How many piles were present? ,Provide a brief description of each pile,Any notes on today? ,Have you cleared all piles for tomorrow? 
+Timestamp,date,piles_present,description,Notes ,piles_cleared
 3/29/2025 12:25:11,3/27/2025,3,"1) Desk pile - empty brita, gum container, bag of q-tips, packing clip, glasses, glasses in case, sleep mask, candy wrappers, medication organizer, fork, aquaphor
 2) Crochet pile - wire, bag of yarn, work in progress, safety eyes, bag of cards
 3) Food/ work pile - pretzel bag, oreo container, skittles bag, girl scout cookie bag, binder, pen, ipad, planner, pencil case
