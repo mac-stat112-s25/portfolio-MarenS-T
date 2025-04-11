@@ -73,12 +73,6 @@ data_means <- only_data |>
 ```
 
 ```{r}
-ggplot(data_means, aes(x=date, y = mean_rest, group = mean_rest)) +
-  geom_() 
-
-
-
-
 
 
   # geom_point(aes(y=mean_stress, color = "mean_stress")) +
@@ -90,8 +84,10 @@ ggplot(data_means, aes(x=date, y = mean_rest, group = mean_rest)) +
 long_data_means <- data_means |>
   pivot_longer(cols = starts_with("mean"), names_to = "data_point", values_to = "values") 
 
-ggplot(long_data_means, aes(x = date, y = values, color = data_point)) +
-  geom_point() 
+data_means %>% 
+  ggplot(aes(x = date)) +
+  #geom_point() + 
+  geom_line(aes(y = mean_rest, color = "blue"))
   
 ```
 
@@ -99,6 +95,9 @@ ggplot(long_data_means, aes(x = date, y = values, color = data_point)) +
 as.Date("day_complete$date", format("%m, %d, %Y"))
 ```
 
+```{r}
+print(day_complete)
+```
 
 
 
