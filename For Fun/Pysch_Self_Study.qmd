@@ -96,11 +96,27 @@ as.Date("day_complete$date", format("%m, %d, %Y"))
 ```
 
 ```{r}
-print(day_complete)
+day_complete |>
+  select(date, time_of_day, rest_level, stress_level, overwhelm, caffeine, sleep_amount, piles_present) |>
+  print()
 ```
 
+```{r}
+data_means |>
+  left_join(day_end) |>
+  select(!description) |>
+  select(!Notes) |>
+ggplot(aes(x=mean_rest, y=piles_present)) +
+  geom_point() +
+  geom_smooth()
+``` 
 
 
+```{r}
+day_complete |>
+  group_by(date) |>
+  mutate(caffeine_day = str_detect(caffeine, "Yes"))
+```
 
 
 
